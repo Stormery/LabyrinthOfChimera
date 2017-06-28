@@ -1,0 +1,5682 @@
+#include <iostream>
+#include <conio.h>
+#include <cstdlib>
+#include <stdio.h>
+#include <windows.h>
+#include <time.h>
+#include <fstream>
+using namespace std;
+
+int life=1;
+string nick;
+int mob=1;
+int hpmoba;
+void CzyWalcze();int lvl=1;
+void drop();
+int hpbossa=1000, hpmoje=500*lvl;  int xpboss=0;
+int wybor; int damage; int wpierdol;
+int chance;
+int hppotka=3;int hpbonus;
+int bron; int zbroja; int bonus_broni; int bonus_zbroi;
+int special;
+int obecny_xp;
+int xp;
+string jaki_potwor;
+string jakas_bron;
+        int opcja=0;
+int scroll=5;
+int bron_wspolczynnik=1;
+int bron_enchant;
+int bonus_bossa;
+fstream plik;
+void potwor();
+int potwory;
+void nowagra();
+int ile_xpa(int d, int lvl);
+void naliczanie(int obecny_xp, int xp);
+int random(int d );
+void ulti();
+void paski();
+void walka_z_bossem(); void walka();
+void zgon();
+void jaka_bron();
+int enchant(int bron);
+int attack_dmg(int bonus_broni);
+int kowal();
+void zapis();
+int staty()
+{
+    ///////////////////////////////////////////////////////////////////////////////Staty broni/////////////////////////////////////////////////////////////////
+hpbossa=10000*lvl;  bonus_bossa=10*lvl; hpmoba=hpmoba*lvl;
+if(bron==1){bonus_broni=20*lvl;bron_wspolczynnik=1;}
+if(bron==2){bonus_broni=10*lvl;bron_wspolczynnik=2;}
+if(zbroja==1){hpbonus=50*lvl;hpmoje=hpmoje+hpbonus;bonus_zbroi=100*lvl;} //bonu zbroi to + do hp potek
+if(zbroja==2){hpbonus=100*lvl;hpmoje=hpmoje+hpbonus;bonus_zbroi=50*lvl;}
+if (hpmoje<=0){life-=1;}
+jaka_bron();
+
+bonus_broni=attack_dmg(bonus_broni);
+}
+int cos=1;
+int d;
+int sala=0;
+int strona;
+                                    int klucz=0;
+void lab1()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           -------------" << endl;
+    cout << "                                    " << endl;
+    cout << "                                    " << endl;
+    cout << "                                    " << endl;
+    cout << "------------           -------------" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |     O     |            " << endl;
+}
+void lab2()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           -------------" << endl;
+    cout << "                                    " << endl;
+    cout << "                                    " << endl;
+    cout << "                                    " << endl;
+    cout << "------------           -------------" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |     O     |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab3()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           -------------" << endl;
+    cout << "                                    " << endl;
+    cout << "                                    " << endl;
+    cout << "                                    " << endl;
+    cout << "------------           -------------" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |     O     |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab4()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           -------------" << endl;
+    cout << "                                    " << endl;
+    cout << "                                    " << endl;
+    cout << "                                    " << endl;
+    cout << "------------           -------------" << endl;
+    cout << "           |     O     |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab5()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           -------------" << endl;
+    cout << "                                    " << endl;
+    cout << "                                    " << endl;
+    cout << "                                    " << endl;
+    cout << "------------     O     -------------" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab6()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           -------------" << endl;
+    cout << "                                    " << endl;
+    cout << "                                    " << endl;
+    cout << "                 O                  " << endl;
+    cout << "------------           -------------" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab7()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           -------------" << endl;
+    cout << "                                    " << endl;
+    cout << "                 O                  " << endl;
+    cout << "                                    " << endl;
+    cout << "------------           -------------" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab8()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           -------------" << endl;
+    cout << "                 O                  " << endl;
+    cout << "                                    " << endl;
+    cout << "                                    " << endl;
+    cout << "------------           -------------" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab9()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------     O     -------------" << endl;
+    cout << "                                    " << endl;
+    cout << "                                    " << endl;
+    cout << "                                    " << endl;
+    cout << "------------           -------------" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab10()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |     O     |" << endl;
+    cout << "------------           -------------" << endl;
+    cout << "                                    " << endl;
+    cout << "                                    " << endl;
+    cout << "                                    " << endl;
+    cout << "------------           -------------" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab11()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |     O     |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           -------------" << endl;
+    cout << "                                    " << endl;
+    cout << "                                    " << endl;
+    cout << "                                    " << endl;
+    cout << "------------           -------------" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab12()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |     O     |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           -------------" << endl;
+    cout << "                                    " << endl;
+    cout << "                                    " << endl;
+    cout << "                                    " << endl;
+    cout << "------------           -------------" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab13()
+{
+    cout << "           |     O     |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           -------------" << endl;
+    cout << "                                    " << endl;
+    cout << "                                    " << endl;
+    cout << "                                    " << endl;
+    cout << "------------           -------------" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab14()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           -------------" << endl;
+    cout << "                                    " << endl;
+    cout << " O                                  " << endl;
+    cout << "                                    " << endl;
+    cout << "------------           -------------" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab15()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           -------------" << endl;
+    cout << "                                    " << endl;
+    cout << "   O                                " << endl;
+    cout << "                                    " << endl;
+    cout << "------------           -------------" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab16()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           -------------" << endl;
+    cout << "                                    " << endl;
+    cout << "     O                              " << endl;
+    cout << "                                    " << endl;
+    cout << "------------           -------------" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+
+}
+void lab17()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           -------------" << endl;
+    cout << "                                    " << endl;
+    cout << "       O                            " << endl;
+    cout << "                                    " << endl;
+    cout << "------------           -------------" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+
+}
+void lab18()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           -------------" << endl;
+    cout << "                                    " << endl;
+    cout << "         O                          " << endl;
+    cout << "                                    " << endl;
+    cout << "------------           -------------" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+
+}
+void lab19()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           -------------" << endl;
+    cout << "                                    " << endl;
+    cout << "           O                        " << endl;
+    cout << "                                    " << endl;
+    cout << "------------           -------------" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+
+}
+void lab20()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           -------------" << endl;
+    cout << "                                    " << endl;
+    cout << "              O                     " << endl;
+    cout << "                                    " << endl;
+    cout << "------------           -------------" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+
+}void lab21()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           -------------" << endl;
+    cout << "                                    " << endl;
+    cout << "               O                    " << endl;
+    cout << "                                    " << endl;
+    cout << "------------           -------------" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+
+}
+void lab22()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           -------------" << endl;
+    cout << "                                    " << endl;
+    cout << "                   O                " << endl;
+    cout << "                                    " << endl;
+    cout << "------------           -------------" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab23()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           -------------" << endl;
+    cout << "                                    " << endl;
+    cout << "                     O              " << endl;
+    cout << "                                    " << endl;
+    cout << "------------           -------------" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab24()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           -------------" << endl;
+    cout << "                                    " << endl;
+    cout << "                       O            " << endl;
+    cout << "                                    " << endl;
+    cout << "------------           -------------" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab25()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           -------------" << endl;
+    cout << "                                    " << endl;
+    cout << "                         O          " << endl;
+    cout << "                                    " << endl;
+    cout << "------------           -------------" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab26()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           -------------" << endl;
+    cout << "                                    " << endl;
+    cout << "                           O        " << endl;
+    cout << "                                    " << endl;
+    cout << "------------           -------------" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab27()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           -------------" << endl;
+    cout << "                                    " << endl;
+    cout << "                             O      " << endl;
+    cout << "                                    " << endl;
+    cout << "------------           -------------" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab28()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           -------------" << endl;
+    cout << "                                    " << endl;
+    cout << "                               O    " << endl;
+    cout << "                                    " << endl;
+    cout << "------------           -------------" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab29()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           -------------" << endl;
+    cout << "                                    " << endl;
+    cout << "                                  O " << endl;
+    cout << "                                    " << endl;
+    cout << "------------           -------------" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab29i()
+{
+    cout << " |           |           " << endl;
+    cout << " |           |" << endl;
+    cout << " |           |" << endl;
+    cout << " |           |" << endl;
+    cout << " |           -------------" << endl;
+    cout << " |                        " << endl;
+    cout << " |                   O    " << endl;
+    cout << " |                        " << endl;
+    cout << " |           -------------" << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+}
+void lab30()
+{
+    cout << " |           |           " << endl;
+    cout << " |           |" << endl;
+    cout << " |           |" << endl;
+    cout << " |           |" << endl;
+    cout << " |           -------------" << endl;
+    cout << " |                        " << endl;
+    cout << " |                   O    " << endl;
+    cout << " |                        " << endl;
+    cout << " |           -------------" << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+}
+
+void lab31()
+{
+    cout << " |           |           " << endl;
+    cout << " |           |" << endl;
+    cout << " |           |" << endl;
+    cout << " |           |" << endl;
+    cout << " |           -------------" << endl;
+    cout << " |                        " << endl;
+    cout << " |                O       " << endl;
+    cout << " |                        " << endl;
+    cout << " |           -------------" << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+}
+void lab32()
+{
+    cout << " |           |           " << endl;
+    cout << " |           |" << endl;
+    cout << " |           |" << endl;
+    cout << " |           |" << endl;
+    cout << " |           -------------" << endl;
+    cout << " |                        " << endl;
+    cout << " |             O          " << endl;
+    cout << " |                        " << endl;
+    cout << " |           -------------" << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+}
+void lab33()
+{
+    cout << " |           |           " << endl;
+    cout << " |           |" << endl;
+    cout << " |           |" << endl;
+    cout << " |           |" << endl;
+    cout << " |           -------------" << endl;
+    cout << " |                        " << endl;
+    cout << " |           O            " << endl;
+    cout << " |                        " << endl;
+    cout << " |           -------------" << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+}
+void lab34()
+{
+    cout << " |           |           " << endl;
+    cout << " |           |" << endl;
+    cout << " |           |" << endl;
+    cout << " |           |" << endl;
+    cout << " |           -------------" << endl;
+    cout << " |                        " << endl;
+    cout << " |         O              " << endl;
+    cout << " |                        " << endl;
+    cout << " |           -------------" << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+}
+void lab35()
+{
+    cout << " |           |           " << endl;
+    cout << " |           |" << endl;
+    cout << " |           |" << endl;
+    cout << " |           |" << endl;
+    cout << " |           -------------" << endl;
+    cout << " |                        " << endl;
+    cout << " |      O                 " << endl;
+    cout << " |                        " << endl;
+    cout << " |           -------------" << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+}
+void lab36()
+{
+    cout << " |           |           " << endl;
+    cout << " |           |" << endl;
+    cout << " |           |" << endl;
+    cout << " |           |" << endl;
+    cout << " |      O    -------------" << endl;
+    cout << " |                        " << endl;
+    cout << " |                        " << endl;
+    cout << " |                        " << endl;
+    cout << " |           -------------" << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+}
+void lab37()
+{
+    cout << " |           |           " << endl;
+    cout << " |           |" << endl;
+    cout << " |      O    |" << endl;
+    cout << " |           |" << endl;
+    cout << " |           -------------" << endl;
+    cout << " |                        " << endl;
+    cout << " |                        " << endl;
+    cout << " |                        " << endl;
+    cout << " |           -------------" << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+}
+void lab38()
+{
+    cout << " |      O    |           " << endl;
+    cout << " |           |" << endl;
+    cout << " |           |" << endl;
+    cout << " |           |" << endl;
+    cout << " |           -------------" << endl;
+    cout << " |                        " << endl;
+    cout << " |                        " << endl;
+    cout << " |                        " << endl;
+    cout << " |           -------------" << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+}
+void lab39()
+{
+    cout << " |           |           " << endl;
+    cout << " |           |" << endl;
+    cout << " |           |" << endl;
+    cout << " |           |" << endl;
+    cout << " |           -------------" << endl;
+    cout << " |                        " << endl;
+    cout << " |                        " << endl;
+    cout << " |                        " << endl;
+    cout << " |      O    -------------" << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+}
+void lab40()
+{
+    cout << " |           |           " << endl;
+    cout << " |           |" << endl;
+    cout << " |           |" << endl;
+    cout << " |           |" << endl;
+    cout << " |           -------------" << endl;
+    cout << " |                        " << endl;
+    cout << " |                        " << endl;
+    cout << " |                        " << endl;
+    cout << " |           -------------" << endl;
+    cout << " |           |            " << endl;
+    cout << " |      O    |            " << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+}
+void lab41()
+{
+    cout << " |           |           " << endl;
+    cout << " |           |" << endl;
+    cout << " |           |" << endl;
+    cout << " |           |" << endl;
+    cout << " |           -------------" << endl;
+    cout << " |                        " << endl;
+    cout << " |                        " << endl;
+    cout << " |                        " << endl;
+    cout << " |           -------------" << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+    cout << " |      O    |            " << endl;
+}
+void lab42()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           -------------" << endl;
+    cout << "                                    " << endl;
+    cout << "                                  O " << endl;
+    cout << "                                    " << endl;
+    cout << "------------------------------------" << endl;
+
+}
+void lab43()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           -------------" << endl;
+    cout << "                                    " << endl;
+    cout << "                                O   " << endl;
+    cout << "                                    " << endl;
+    cout << "------------------------------------" << endl;
+}
+void lab44()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           -------------" << endl;
+    cout << "                                    " << endl;
+    cout << "                             O      " << endl;
+    cout << "                                    " << endl;
+    cout << "------------------------------------" << endl;
+}
+void lab45()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           -------------" << endl;
+    cout << "                                    " << endl;
+    cout << "                          O         " << endl;
+    cout << "                                    " << endl;
+    cout << "------------------------------------" << endl;
+}
+void lab46()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           -------------" << endl;
+    cout << "                                    " << endl;
+    cout << "                       O            " << endl;
+    cout << "                                    " << endl;
+    cout << "------------------------------------" << endl;
+}
+void lab47()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           -------------" << endl;
+    cout << "                                    " << endl;
+    cout << "                    O               " << endl;
+    cout << "                                    " << endl;
+    cout << "------------------------------------" << endl;
+}
+void lab48()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           -------------" << endl;
+    cout << "                                    " << endl;
+    cout << "                 O                  " << endl;
+    cout << "                                    " << endl;
+    cout << "------------------------------------" << endl;
+}
+void lab49()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           -------------" << endl;
+    cout << "                                    " << endl;
+    cout << "              O                     " << endl;
+    cout << "                                    " << endl;
+    cout << "------------------------------------" << endl;
+}
+void lab50()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           -------------" << endl;
+    cout << "                                    " << endl;
+    cout << "           O                        " << endl;
+    cout << "                                    " << endl;
+    cout << "------------------------------------" << endl;
+}
+void lab51()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           -------------" << endl;
+    cout << "                                    " << endl;
+    cout << "        O                           " << endl;
+    cout << "                                    " << endl;
+    cout << "------------------------------------" << endl;
+}
+void lab52()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           -------------" << endl;
+    cout << "                                    " << endl;
+    cout << "     O                              " << endl;
+    cout << "                                    " << endl;
+    cout << "------------------------------------" << endl;
+}
+void lab53()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           -------------" << endl;
+    cout << "                                    " << endl;
+    cout << " O                                  " << endl;
+    cout << "                                    " << endl;
+    cout << "------------------------------------" << endl;
+}
+void lab54()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           -------------" << endl;
+    cout << "                 O                  " << endl;
+    cout << "                                    " << endl;
+    cout << "                                    " << endl;
+    cout << "------------------------------------" << endl;
+}
+void lab55()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------     O     -------------" << endl;
+    cout << "                                    " << endl;
+    cout << "                                    " << endl;
+    cout << "                                    " << endl;
+    cout << "------------------------------------" << endl;
+}
+void lab56()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |     O     |" << endl;
+    cout << "------------           -------------" << endl;
+    cout << "                                    " << endl;
+    cout << "                                    " << endl;
+    cout << "                                    " << endl;
+    cout << "------------------------------------" << endl;
+}
+void lab57()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |     O     |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           -------------" << endl;
+    cout << "                                    " << endl;
+    cout << "                                    " << endl;
+    cout << "                                    " << endl;
+    cout << "------------------------------------" << endl;
+}
+void lab58()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |     O     |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           -------------" << endl;
+    cout << "                                    " << endl;
+    cout << "                                    " << endl;
+    cout << "                                    " << endl;
+    cout << "------------------------------------" << endl;
+}
+void lab59()
+{
+    cout << "           |     O     |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           -------------" << endl;
+    cout << "                                    " << endl;
+    cout << "                                    " << endl;
+    cout << "                                    " << endl;
+    cout << "------------------------------------" << endl;
+}
+void lab60()
+{
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           |" << endl;
+    cout << "                       |" << endl;
+    cout << " O                     |" << endl;
+    cout << "                       |" << endl;
+    cout << "------------           |" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab61()
+{
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           |" << endl;
+    cout << "                       |" << endl;
+    cout << "    O                  |" << endl;
+    cout << "                       |" << endl;
+    cout << "------------           |" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab62()
+{
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           |" << endl;
+    cout << "                       |" << endl;
+    cout << "       O               |" << endl;
+    cout << "                       |" << endl;
+    cout << "------------           |" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab63()
+{
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           |" << endl;
+    cout << "                       |" << endl;
+    cout << "          O            |" << endl;
+    cout << "                       |" << endl;
+    cout << "------------           |" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab64()
+{
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           |" << endl;
+    cout << "                       |" << endl;
+    cout << "             O         |" << endl;
+    cout << "                       |" << endl;
+    cout << "------------           |" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab65()
+{
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           |" << endl;
+    cout << "                       |" << endl;
+    cout << "                O      |" << endl;
+    cout << "                       |" << endl;
+    cout << "------------           |" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+
+void lab66()
+{
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           |" << endl;
+    cout << "                O      |" << endl;
+    cout << "                       |" << endl;
+    cout << "                       |" << endl;
+    cout << "------------           |" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab67()
+{
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------    O      |" << endl;
+    cout << "                       |" << endl;
+    cout << "                       |" << endl;
+    cout << "                       |" << endl;
+    cout << "------------           |" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab68()
+{
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |    O      |" << endl;
+    cout << "------------           |" << endl;
+    cout << "                       |" << endl;
+    cout << "                       |" << endl;
+    cout << "                       |" << endl;
+    cout << "------------           |" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab69()
+{
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |    O      |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           |" << endl;
+    cout << "                       |" << endl;
+    cout << "                       |" << endl;
+    cout << "                       |" << endl;
+    cout << "------------           |" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab70()
+{
+    cout << "           |           |" << endl;
+    cout << "           |    O      |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           |" << endl;
+    cout << "                       |" << endl;
+    cout << "                       |" << endl;
+    cout << "                       |" << endl;
+    cout << "------------           |" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab71()
+{
+    cout << "           |    O      |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           |" << endl;
+    cout << "                       |" << endl;
+    cout << "                       |" << endl;
+    cout << "                       |" << endl;
+    cout << "------------           |" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab72()
+{
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           |" << endl;
+    cout << "                       |" << endl;
+    cout << "                       |" << endl;
+    cout << "                O      |" << endl;
+    cout << "------------           |" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+
+}
+void lab73()
+{
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           |" << endl;
+    cout << "                       |" << endl;
+    cout << "                       |" << endl;
+    cout << "                       |" << endl;
+    cout << "------------    O      |" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab74()
+{
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           |" << endl;
+    cout << "                       |" << endl;
+    cout << "                       |" << endl;
+    cout << "                       |" << endl;
+    cout << "------------           |" << endl;
+    cout << "           |    O      |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab75()
+{
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           |" << endl;
+    cout << "                       |" << endl;
+    cout << "                       |" << endl;
+    cout << "                       |" << endl;
+    cout << "------------           |" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |    O      |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab76()
+{
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           |" << endl;
+    cout << "                       |" << endl;
+    cout << "                       |" << endl;
+    cout << "                       |" << endl;
+    cout << "------------           |" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |    O      |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab77()
+{
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "------------           |" << endl;
+    cout << "                       |" << endl;
+    cout << "                       |" << endl;
+    cout << "                       |" << endl;
+    cout << "------------           |" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |    O      |            " << endl;
+}
+void lab78()
+{
+    cout << "------------------------------------" << endl;
+    cout << "                                    " << endl;
+    cout << "                                    " << endl;
+    cout << "                                    " << endl;
+    cout << "------------           -------------" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |     O     |            " << endl;
+}
+void lab79()
+{
+    cout << "------------------------------------" << endl;
+    cout << "                                    " << endl;
+    cout << "                                    " << endl;
+    cout << "                                    " << endl;
+    cout << "------------           -------------" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |     O     |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab80()
+{
+    cout << "------------------------------------" << endl;
+    cout << "                                    " << endl;
+    cout << "                                    " << endl;
+    cout << "                                    " << endl;
+    cout << "------------           -------------" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |     O     |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab81()
+{
+    cout << "------------------------------------" << endl;
+    cout << "                                    " << endl;
+    cout << "                                    " << endl;
+    cout << "                                    " << endl;
+    cout << "------------           -------------" << endl;
+    cout << "           |     O     |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab82()
+{
+    cout << "------------------------------------" << endl;
+    cout << "                                    " << endl;
+    cout << "                                    " << endl;
+    cout << "                                    " << endl;
+    cout << "------------     O     -------------" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab83()
+{
+    cout << "------------------------------------" << endl;
+    cout << "                                    " << endl;
+    cout << "                                    " << endl;
+    cout << "                 O                  " << endl;
+    cout << "------------           -------------" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab84()
+{
+    cout << "------------------------------------" << endl;
+    cout << "                                    " << endl;
+    cout << "                 O                  " << endl;
+    cout << "                                    " << endl;
+    cout << "------------           -------------" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab85()
+{
+    cout << "------------------------------------" << endl;
+    cout << "                                    " << endl;
+    cout << "                   O                " << endl;
+    cout << "                                    " << endl;
+    cout << "------------           -------------" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab86()
+{
+    cout << "------------------------------------" << endl;
+    cout << "                                    " << endl;
+    cout << "                     O              " << endl;
+    cout << "                                    " << endl;
+    cout << "------------           -------------" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab87()
+{
+    cout << "------------------------------------" << endl;
+    cout << "                                    " << endl;
+    cout << "                       O            " << endl;
+    cout << "                                    " << endl;
+    cout << "------------           -------------" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab88()
+{
+    cout << "------------------------------------" << endl;
+    cout << "                                    " << endl;
+    cout << "                          O         " << endl;
+    cout << "                                    " << endl;
+    cout << "------------           -------------" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab89()
+{
+    cout << "------------------------------------" << endl;
+    cout << "                                    " << endl;
+    cout << "                              O     " << endl;
+    cout << "                                    " << endl;
+    cout << "------------           -------------" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab90()
+{
+    cout << "------------------------------------" << endl;
+    cout << "                                    " << endl;
+    cout << "                                 O  " << endl;
+    cout << "                                    " << endl;
+    cout << "------------           -------------" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab91()
+{
+    cout << "------------------------------------" << endl;
+    cout << "                                    " << endl;
+    cout << "                                   O" << endl;
+    cout << "                                    " << endl;
+    cout << "------------           -------------" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab92()
+{
+    cout << "------------------------------------" << endl;
+    cout << "                                    " << endl;
+    cout << "               O                    " << endl;
+    cout << "                                    " << endl;
+    cout << "------------           -------------" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab93()
+{
+    cout << "------------------------------------" << endl;
+    cout << "                                    " << endl;
+    cout << "            O                       " << endl;
+    cout << "                                    " << endl;
+    cout << "------------           -------------" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab94()
+{
+    cout << "------------------------------------" << endl;
+    cout << "                                    " << endl;
+    cout << "         O                          " << endl;
+    cout << "                                    " << endl;
+    cout << "------------           -------------" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab95()
+{
+    cout << "------------------------------------" << endl;
+    cout << "                                    " << endl;
+    cout << "      O                             " << endl;
+    cout << "                                    " << endl;
+    cout << "------------           -------------" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab96()
+{
+    cout << "------------------------------------" << endl;
+    cout << "                                    " << endl;
+    cout << "   O                                " << endl;
+    cout << "                                    " << endl;
+    cout << "------------           -------------" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab97()
+{
+    cout << "------------------------------------" << endl;
+    cout << "                                    " << endl;
+    cout << "O                                   " << endl;
+    cout << "                                    " << endl;
+    cout << "------------           -------------" << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab98()
+{
+    cout << "-----------------------\ " << endl;
+    cout << "                       |  " << endl;
+    cout << "O                      | " << endl;
+    cout << "                       | " << endl;
+    cout << "------------           | " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab99()
+{
+    cout << "-----------------------\ " << endl;
+    cout << "                       |  " << endl;
+    cout << "   O                   | " << endl;
+    cout << "                       | " << endl;
+    cout << "------------           | " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab99i()
+{
+    cout << "-----------------------\ " << endl;
+    cout << "                       |  " << endl;
+    cout << "      O                | " << endl;
+    cout << "                       | " << endl;
+    cout << "------------           | " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab100()
+{
+    cout << "-----------------------\ " << endl;
+    cout << "                       |  " << endl;
+    cout << "         O             | " << endl;
+    cout << "                       | " << endl;
+    cout << "------------           | " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab101()
+{
+    cout << "-----------------------\ " << endl;
+    cout << "                       |  " << endl;
+    cout << "            O          | " << endl;
+    cout << "                       | " << endl;
+    cout << "------------           | " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab102()
+{
+    cout << "-----------------------\ " << endl;
+    cout << "                       |  " << endl;
+    cout << "                       | " << endl;
+    cout << "              O        | " << endl;
+    cout << "------------           | " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab102i()
+{
+    cout << "-----------------------\ " << endl;
+    cout << "                       |  " << endl;
+    cout << "                       | " << endl;
+    cout << "                       | " << endl;
+    cout << "------------    O      | " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab103()
+{
+    cout << "-----------------------\ " << endl;
+    cout << "                       |  " << endl;
+    cout << "                       | " << endl;
+    cout << "                       | " << endl;
+    cout << "------------           | " << endl;
+    cout << "           |     O     |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab104()
+{
+    cout << "-----------------------\ " << endl;
+    cout << "                       |  " << endl;
+    cout << "                       | " << endl;
+    cout << "                       | " << endl;
+    cout << "------------           | " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |     O     |            " << endl;
+    cout << "           |           |            " << endl;
+}
+void lab104i()
+{
+    cout << "-----------------------\ " << endl;
+    cout << "                       |  " << endl;
+    cout << "                       | " << endl;
+    cout << "                       | " << endl;
+    cout << "------------           | " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |           |            " << endl;
+    cout << "           |     O     |            " << endl;
+}
+void lab105()
+{
+    cout << " /-------------------------" << endl;
+    cout << " |                         " << endl;
+    cout << " |                        O" << endl;
+    cout << " |                         " << endl;
+    cout << " |           /-------------" << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+}
+void lab106()
+{
+    cout << " /-------------------------" << endl;
+    cout << " |                         " << endl;
+    cout << " |                     O   " << endl;
+    cout << " |                         " << endl;
+    cout << " |           /-------------" << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+}
+void lab107()
+{
+    cout << " /-------------------------" << endl;
+    cout << " |                         " << endl;
+    cout << " |                  O      " << endl;
+    cout << " |                         " << endl;
+    cout << " |           /-------------" << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+}
+void lab108()
+{
+    cout << " /-------------------------" << endl;
+    cout << " |                         " << endl;
+    cout << " |               O         " << endl;
+    cout << " |                         " << endl;
+    cout << " |           /-------------" << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+}
+void lab109()
+{
+    cout << " /-------------------------" << endl;
+    cout << " |                         " << endl;
+    cout << " |            O            " << endl;
+    cout << " |                         " << endl;
+    cout << " |           /-------------" << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+}
+void lab110()
+{
+    cout << " /-------------------------" << endl;
+    cout << " |                         " << endl;
+    cout << " |         O               " << endl;
+    cout << " |                         " << endl;
+    cout << " |           /-------------" << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+}
+void lab111()
+{
+    cout << " /-------------------------" << endl;
+    cout << " |                         " << endl;
+    cout << " |                         " << endl;
+    cout << " |       O                 " << endl;
+    cout << " |           /-------------" << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+}
+void lab112()
+{
+    cout << " /-------------------------" << endl;
+    cout << " |                         " << endl;
+    cout << " |                         " << endl;
+    cout << " |                         " << endl;
+    cout << " |     O     /-------------" << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+}
+void lab113()
+{
+    cout << " /-------------------------" << endl;
+    cout << " |                         " << endl;
+    cout << " |                         " << endl;
+    cout << " |                         " << endl;
+    cout << " |           /-------------" << endl;
+    cout << " |     O     |            " << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+}void lab114()
+{
+    cout << " /-------------------------" << endl;
+    cout << " |                         " << endl;
+    cout << " |                         " << endl;
+    cout << " |                         " << endl;
+    cout << " |           /-------------" << endl;
+    cout << " |           |            " << endl;
+    cout << " |     O     |            " << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+}
+void lab115()
+{
+    cout << " /-------------------------" << endl;
+    cout << " |                         " << endl;
+    cout << " |                         " << endl;
+    cout << " |                         " << endl;
+    cout << " |           /-------------" << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+    cout << " |     O     |            " << endl;
+    cout << " |           |            " << endl;
+}
+void lab116()
+{
+    cout << " /-------------------------" << endl;
+    cout << " |                         " << endl;
+    cout << " |                         " << endl;
+    cout << " |                         " << endl;
+    cout << " |           /-------------" << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+    cout << " |           |            " << endl;
+    cout << " |     O     |            " << endl;
+}
+void lab117()
+{
+    cout << "|     O     |           " << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           \-------------" << endl;
+    cout << "|                         " << endl;
+    cout << "|                         " << endl;
+    cout << "|                         " << endl;
+    cout << "\-------------------------" << endl;
+}
+void lab118()
+{
+    cout << "|           |           " << endl;
+    cout << "|     O     |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           \-------------" << endl;
+    cout << "|                         " << endl;
+    cout << "|                         " << endl;
+    cout << "|                         " << endl;
+    cout << "\-------------------------" << endl;
+}
+void lab119()
+{
+    cout << "|           |           " << endl;
+    cout << "|           |" << endl;
+    cout << "|     O     |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           \-------------" << endl;
+    cout << "|                         " << endl;
+    cout << "|                         " << endl;
+    cout << "|                         " << endl;
+    cout << "\-------------------------" << endl;
+}void lab120()
+{
+    cout << "|           |           " << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|     O     |" << endl;
+    cout << "|           \-------------" << endl;
+    cout << "|                         " << endl;
+    cout << "|                         " << endl;
+    cout << "|                         " << endl;
+    cout << "\-------------------------" << endl;
+}
+void lab121()
+{
+    cout << "|           |           " << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           \-------------" << endl;
+    cout << "|       O                 " << endl;
+    cout << "|                         " << endl;
+    cout << "|                         " << endl;
+    cout << "\-------------------------" << endl;
+}
+void lab122()
+{
+    cout << "|           |           " << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           \-------------" << endl;
+    cout << "|                         " << endl;
+    cout << "|         O               " << endl;
+    cout << "|                         " << endl;
+    cout << "\-------------------------" << endl;
+}
+void lab123()
+{
+    cout << "|           |           " << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           \-------------" << endl;
+    cout << "|                         " << endl;
+    cout << "|            O            " << endl;
+    cout << "|                         " << endl;
+    cout << "\-------------------------" << endl;
+}
+void lab124()
+{
+    cout << "|           |           " << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           \-------------" << endl;
+    cout << "|                         " << endl;
+    cout << "|               O         " << endl;
+    cout << "|                         " << endl;
+    cout << "\-------------------------" << endl;
+}
+void lab125()
+{
+    cout << "|           |           " << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           \-------------" << endl;
+    cout << "|                         " << endl;
+    cout << "|                  O      " << endl;
+    cout << "|                         " << endl;
+    cout << "\-------------------------" << endl;
+}
+void lab126()
+{
+    cout << "|           |           " << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           \-------------" << endl;
+    cout << "|                         " << endl;
+    cout << "|                     O   " << endl;
+    cout << "|                         " << endl;
+    cout << "\-------------------------" << endl;
+}
+void lab127()
+{
+    cout << "|           |           " << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           \-------------" << endl;
+    cout << "|                         " << endl;
+    cout << "|                        O" << endl;
+    cout << "|                         " << endl;
+    cout << "\-------------------------" << endl;
+}
+void lab128()
+{
+    cout << "           |     O     |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "-----------/           |"<< endl;
+    cout << "                       |"<< endl;
+    cout << "                       |"<< endl;
+    cout << "                       |" << endl;
+    cout << "-----------------------/"<< endl;
+}
+void lab129()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |     O     |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "-----------/           |"<< endl;
+    cout << "                       |"<< endl;
+    cout << "                       |"<< endl;
+    cout << "                       |" << endl;
+    cout << "-----------------------/"<< endl;
+}
+void lab130()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |     O     |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "-----------/           |"<< endl;
+    cout << "                       |"<< endl;
+    cout << "                       |"<< endl;
+    cout << "                       |" << endl;
+    cout << "-----------------------/"<< endl;
+}
+void lab131()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |     O     |" << endl;
+    cout << "           |           |" << endl;
+    cout << "-----------/           |"<< endl;
+    cout << "                       |"<< endl;
+    cout << "                       |"<< endl;
+    cout << "                       |" << endl;
+    cout << "-----------------------/"<< endl;
+}
+void lab132()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |     O     |" << endl;
+    cout << "-----------/           |"<< endl;
+    cout << "                       |"<< endl;
+    cout << "                       |"<< endl;
+    cout << "                       |" << endl;
+    cout << "-----------------------/"<< endl;
+}
+void lab133()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "-----------/    O      |"<< endl;
+    cout << "                       |"<< endl;
+    cout << "                       |"<< endl;
+    cout << "                       |" << endl;
+    cout << "-----------------------/"<< endl;
+}
+void lab134()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "-----------/           |"<< endl;
+    cout << "              O        |"<< endl;
+    cout << "                       |"<< endl;
+    cout << "                       |" << endl;
+    cout << "-----------------------/"<< endl;
+}
+void lab135()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "-----------/           |"<< endl;
+    cout << "                       |"<< endl;
+    cout << "            O          |"<< endl;
+    cout << "                       |" << endl;
+    cout << "-----------------------/"<< endl;
+}
+void lab136()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "-----------/           |"<< endl;
+    cout << "                       |"<< endl;
+    cout << "         O             |"<< endl;
+    cout << "                       |" << endl;
+    cout << "-----------------------/"<< endl;
+}
+void lab137()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "-----------/           |"<< endl;
+    cout << "                       |"<< endl;
+    cout << "      O                |"<< endl;
+    cout << "                       |" << endl;
+    cout << "-----------------------/"<< endl;
+}
+void lab138()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "-----------/           |"<< endl;
+    cout << "                       |"<< endl;
+    cout << "   O                   |"<< endl;
+    cout << "                       |" << endl;
+    cout << "-----------------------/"<< endl;
+}
+void lab139()
+{
+    cout << "           |           |           " << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "           |           |" << endl;
+    cout << "-----------/           |"<< endl;
+    cout << "                       |"<< endl;
+    cout << "O                      |"<< endl;
+    cout << "                       |" << endl;
+    cout << "-----------------------/"<< endl;
+}
+void lab140()
+{
+
+    cout << "--------------------|"<< endl;
+    cout << "                    |"<< endl;
+    cout << "O                   |"<< endl;
+    cout << "                    |" << endl;
+    cout << "--------------------|"<< endl;
+}
+void lab141()
+{
+
+    cout << "--------------------|"<< endl;
+    cout << "                    |"<< endl;
+    cout << "   O                |"<< endl;
+    cout << "                    |" << endl;
+    cout << "--------------------|"<< endl;
+}
+
+void lab142()
+{
+
+    cout << "--------------------|"<< endl;
+    cout << "                    |"<< endl;
+    cout << "      O             |"<< endl;
+    cout << "                    |" << endl;
+    cout << "--------------------|"<< endl;
+}
+void lab143()
+{
+
+    cout << "--------------------|"<< endl;
+    cout << "                    |"<< endl;
+    cout << "         O          |"<< endl;
+    cout << "                    |" << endl;
+    cout << "--------------------|"<< endl;
+}
+void lab144()
+{
+
+    cout << "--------------------|"<< endl;
+    cout << "                    |"<< endl;
+    cout << "            O       |"<< endl;
+    cout << "                    |" << endl;
+    cout << "--------------------|"<< endl;
+}
+void lab145()
+{
+
+    cout << "--------------------|"<< endl;
+    cout << "                    |"<< endl;
+    cout << "               O    |"<< endl;
+    cout << "                    |" << endl;
+    cout << "--------------------|"<< endl;
+}
+void lab146()
+{
+    cout << "|-----------|" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |"<< endl;
+    cout << "|     O     |"<< endl;
+
+
+}
+void lab147()
+{
+    cout << "|-----------|" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|     O     |"<< endl;
+    cout << "|           |"<< endl;
+
+
+}
+void lab148()
+{
+    cout << "|-----------|" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|     O     |" << endl;
+    cout << "|           |"<< endl;
+    cout << "|           |"<< endl;
+
+
+}
+void lab149()
+{
+    cout << "|-----------|" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|     O     |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |"<< endl;
+    cout << "|           |"<< endl;
+
+
+}
+void lab150()
+{
+    cout << "|-----------|" << endl;
+    cout << "|           |" << endl;
+    cout << "|     O     |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |"<< endl;
+    cout << "|           |"<< endl;
+
+
+}
+void lab151()
+{
+
+    cout << "|--------------------"<< endl;
+    cout << "|                    "<< endl;
+    cout << "|                   O"<< endl;
+    cout << "|                    " << endl;
+    cout << "|--------------------"<< endl;
+}
+void lab152()
+{
+
+    cout << "|--------------------"<< endl;
+    cout << "|                    "<< endl;
+    cout << "|                O   "<< endl;
+    cout << "|                    " << endl;
+    cout << "|--------------------"<< endl;
+}
+void lab153()
+{
+
+    cout << "|--------------------"<< endl;
+    cout << "|                    "<< endl;
+    cout << "|             O      "<< endl;
+    cout << "|                    " << endl;
+    cout << "|--------------------"<< endl;
+}
+void lab154()
+{
+
+    cout << "|--------------------"<< endl;
+    cout << "|                    "<< endl;
+    cout << "|          O         "<< endl;
+    cout << "|                    " << endl;
+    cout << "|--------------------"<< endl;
+}
+void lab155()
+{
+
+    cout << "|--------------------"<< endl;
+    cout << "|                    "<< endl;
+    cout << "|       O            "<< endl;
+    cout << "|                    " << endl;
+    cout << "|--------------------"<< endl;
+}
+void lab156()
+{
+
+    cout << "|--------------------"<< endl;
+    cout << "|                    "<< endl;
+    cout << "|    O               "<< endl;
+    cout << "|                    " << endl;
+    cout << "|--------------------"<< endl;
+}
+void lab157()
+{
+    cout << "|     O     |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |"<< endl;
+    cout << "|-----------|"<< endl;
+
+
+}
+void lab158()
+{
+    cout << "|           |" << endl;
+    cout << "|     O     |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |"<< endl;
+    cout << "|-----------|"<< endl;
+
+
+}
+void lab159()
+{
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|     O     |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |"<< endl;
+    cout << "|-----------|"<< endl;
+
+
+}
+void lab160()
+{
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|     O     |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |"<< endl;
+    cout << "|-----------|"<< endl;
+
+
+}
+void lab161()
+{
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|     O     |" << endl;
+    cout << "|           |"<< endl;
+    cout << "|-----------|"<< endl;
+
+
+}
+void lab162()
+{
+    cout << "    -----    " << endl;
+    cout << "   /  |  \   " << endl;
+    cout << "  /   |   \  " << endl;
+    cout << " /    |    \ " << endl;
+    cout << "|     |     |" << endl;
+    cout << "|    o|o    |" << endl;
+    cout << "|     |     |" << endl;
+    cout << "|     |     |" << endl;
+    cout << "|-----------|" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |"<< endl;
+    cout << "|     O     |"<< endl;
+
+
+}
+void lab163()
+{
+    cout << "    -----    " << endl;
+    cout << "   /  |  \   " << endl;
+    cout << "  /   |   \  " << endl;
+    cout << " /    |    \ " << endl;
+    cout << "|     |     |" << endl;
+    cout << "|    o|o    |" << endl;
+    cout << "|     |     |" << endl;
+    cout << "|     |     |" << endl;
+    cout << "|-----------|" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|     O     |"<< endl;
+    cout << "|           |"<< endl;
+
+
+}
+void lab164()
+{
+    cout << "    -----    " << endl;
+    cout << "   /  |  \   " << endl;
+    cout << "  /   |   \  " << endl;
+    cout << " /    |    \ " << endl;
+    cout << "|     |     |" << endl;
+    cout << "|    o|o    |" << endl;
+    cout << "|     |     |" << endl;
+    cout << "|     |     |" << endl;
+    cout << "|-----------|" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|     O     |" << endl;
+    cout << "|           |"<< endl;
+    cout << "|           |"<< endl;
+
+
+}
+void lab165()
+{
+    cout << "    -----    " << endl;
+    cout << "   /  |  \   " << endl;
+    cout << "  /   |   \  " << endl;
+    cout << " /    |    \ " << endl;
+    cout << "|     |     |" << endl;
+    cout << "|    o|o    |" << endl;
+    cout << "|     |     |" << endl;
+    cout << "|     |     |" << endl;
+    cout << "|-----------|" << endl;
+    cout << "|           |" << endl;
+    cout << "|     O     |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |"<< endl;
+    cout << "|           |"<< endl;
+
+
+}
+void lab166()
+{
+    cout << "    -----    " << endl;
+    cout << "   /     \   " << endl;
+    cout << "  /       \  " << endl;
+    cout << " /|       |\ " << endl;
+    cout << "|o|       |o|" << endl;
+    cout << "| |       | |" << endl;
+    cout << "| /       | |" << endl;
+    cout << "|/        | |" << endl;
+    cout << "|-----------|" << endl;
+    cout << "|           |" << endl;
+    cout << "|     O     |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |"<< endl;
+    cout << "|           |"<< endl;
+
+
+}
+void lab167()
+{
+    cout << "    -----    " << endl;
+    cout << "   /     \   " << endl;
+    cout << "  /       \  " << endl;
+    cout << " /|       |\ " << endl;
+    cout << "|o|       |o|" << endl;
+    cout << "| |       | |" << endl;
+    cout << "| /       | |" << endl;
+    cout << "|/        | |" << endl;
+    cout << "|-----------|" << endl;
+    cout << "|     O     |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |"<< endl;
+    cout << "|           |"<< endl;
+
+
+}
+void lab168()
+{
+    cout << "    -----    " << endl;
+    cout << "   /     \   " << endl;
+    cout << "  /       \  " << endl;
+    cout << " /|       |\ " << endl;
+    cout << "|o|       |o|" << endl;
+    cout << "| |       | |" << endl;
+    cout << "| /       | |" << endl;
+    cout << "|/        | |" << endl;
+    cout << "|-----O-----|" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |"<< endl;
+    cout << "|           |"<< endl;
+
+
+}
+void lab169()
+{
+    cout << "    -----    " << endl;
+    cout << "   /     \   " << endl;
+    cout << "  /       \  " << endl;
+    cout << " /|       |\ " << endl;
+    cout << "|o|       |o|" << endl;
+    cout << "| |       | |" << endl;
+    cout << "| /       | |" << endl;
+    cout << "|/    O   | |" << endl;
+    cout << "|-----------|" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |"<< endl;
+    cout << "|           |"<< endl;
+
+
+}
+void lab170()
+{
+    cout << "    -----    " << endl;
+    cout << "   /     \   " << endl;
+    cout << "  /       \  " << endl;
+    cout << " /|       |\ " << endl;
+    cout << "|o|       |o|" << endl;
+    cout << "| |       | |" << endl;
+    cout << "| /   O   | |" << endl;
+    cout << "|/        | |" << endl;
+    cout << "|-----------|" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |"<< endl;
+    cout << "|           |"<< endl;
+
+
+}
+void lab171()
+{
+    cout << "    -----    " << endl;
+    cout << "   /  |  \   " << endl;
+    cout << "  /   |   \  " << endl;
+    cout << " /    |    \ " << endl;
+    cout << "|     |     |" << endl;
+    cout << "|    o|o    |" << endl;
+    cout << "|     |     |" << endl;
+    cout << "|     |     |" << endl;
+    cout << "|-----------|" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |" << endl;
+    cout << "|           |"<< endl;
+    cout << "|           |"<< endl;
+
+
+}
+void odDolu()
+{
+
+
+    for(int i=1;i<=7; i++)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab1();Sleep(300);break;
+            case 2: system("cls");lab2();Sleep(300);break;
+            case 3: system("cls");lab3();Sleep(300);break;
+            case 4: system("cls");lab4();Sleep(300);break;
+            case 5: system("cls");lab5();Sleep(300);break;
+            case 6: system("cls");lab6();Sleep(300);break;
+            case 7: system("cls");lab7();Sleep(300);break;
+        }
+    }
+
+
+}
+void wDol()
+{
+
+
+    for(int i=7;i>=1; i--)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab1();Sleep(300);break;
+            case 2: system("cls");lab2();Sleep(300);break;
+            case 3: system("cls");lab3();Sleep(300);break;
+            case 4: system("cls");lab4();Sleep(300);break;
+            case 5: system("cls");lab5();Sleep(300);break;
+            case 6: system("cls");lab6();Sleep(300);break;
+            case 7: system("cls");lab7();Sleep(300);break;
+        }
+    }
+
+
+}
+void wGore()
+{
+
+
+    for(int i=7;i>=1; i--)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab13();Sleep(300);break;
+            case 2: system("cls");lab12();Sleep(300);break;
+            case 3: system("cls");lab11();Sleep(300);break;
+            case 4: system("cls");lab10();Sleep(300);break;
+            case 5: system("cls");lab9();Sleep(300);break;
+            case 6: system("cls");lab8();Sleep(300);break;
+            case 7: system("cls");lab7();Sleep(300);break;
+        }
+    }
+
+
+}
+void odGory()
+{
+
+
+    for(int i=1;i<=7; i++)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab13();Sleep(300);break;
+            case 2: system("cls");lab12();Sleep(300);break;
+            case 3: system("cls");lab11();Sleep(300);break;
+            case 4: system("cls");lab10();Sleep(300);break;
+            case 5: system("cls");lab9();Sleep(300);break;
+            case 6: system("cls");lab8();Sleep(300);break;
+            case 7: system("cls");lab7();Sleep(300);break;
+        }
+    }
+
+
+}
+void wLewo()
+{
+
+
+    for(int i=9;i>=1; i--)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab14();Sleep(300);break;
+            case 2: system("cls");lab15();Sleep(300);break;
+            case 3: system("cls");lab16();Sleep(300);break;
+            case 4: system("cls");lab17();Sleep(300);break;
+            case 5: system("cls");lab18();Sleep(300);break;
+            case 6: system("cls");lab19();Sleep(300);break;
+            case 7: system("cls");lab20();Sleep(300);break;
+            case 8: system("cls");lab21();Sleep(300);break;
+            case 9: system("cls");lab7();Sleep(300);break;
+        }
+    }
+
+
+}
+void odLewej()
+{
+
+
+    for(int i=1;i<=9; i++)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab14();Sleep(300);break;
+            case 2: system("cls");lab15();Sleep(300);break;
+            case 3: system("cls");lab16();Sleep(300);break;
+            case 4: system("cls");lab17();Sleep(300);break;
+            case 5: system("cls");lab18();Sleep(300);break;
+            case 6: system("cls");lab19();Sleep(300);break;
+            case 7: system("cls");lab20();Sleep(300);break;
+            case 8: system("cls");lab21();Sleep(300);break;
+            case 9: system("cls");lab7();Sleep(300);break;
+        }
+    }
+
+
+}
+void wPrawo()
+{
+
+
+    for(int i=1;i<=9; i++)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab7();Sleep(300);break;
+            case 2: system("cls");lab22();Sleep(300);break;
+            case 3: system("cls");lab23();Sleep(300);break;
+            case 4: system("cls");lab24();Sleep(300);break;
+            case 5: system("cls");lab25();Sleep(300);break;
+            case 6: system("cls");lab26();Sleep(300);break;
+            case 7: system("cls");lab27();Sleep(300);break;
+            case 8: system("cls");lab28();Sleep(300);break;
+            case 9: system("cls");lab29();Sleep(300);break;
+        }
+    }
+
+
+}
+void odPrawej()
+{
+
+
+    for(int i=9;i>=1; i--)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab7();Sleep(300);break;
+            case 2: system("cls");lab22();Sleep(300);break;
+            case 3: system("cls");lab23();Sleep(300);break;
+            case 4: system("cls");lab24();Sleep(300);break;
+            case 5: system("cls");lab25();Sleep(300);break;
+            case 6: system("cls");lab26();Sleep(300);break;
+            case 7: system("cls");lab27();Sleep(300);break;
+            case 8: system("cls");lab28();Sleep(300);break;
+            case 9: system("cls");lab29();Sleep(300);break;
+        }
+    }
+
+
+}
+
+void odPrawejT()
+{
+
+
+    for(int i=1;i<=7; i++)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab29i();Sleep(300);break;
+            case 2: system("cls");lab30();Sleep(300);break;
+            case 3: system("cls");lab31();Sleep(300);break;
+            case 4: system("cls");lab32();Sleep(300);break;
+            case 5: system("cls");lab33();Sleep(300);break;
+            case 6: system("cls");lab34();Sleep(300);break;
+            case 7: system("cls");lab35();Sleep(300);break;
+
+        }
+    }
+
+
+}
+void wPrawoT()
+{
+
+
+    for(int i=7;i>=1; i--)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab29i();Sleep(300);break;
+            case 2: system("cls");lab30();Sleep(300);break;
+            case 3: system("cls");lab31();Sleep(300);break;
+            case 4: system("cls");lab32();Sleep(300);break;
+            case 5: system("cls");lab33();Sleep(300);break;
+            case 6: system("cls");lab34();Sleep(300);break;
+            case 7: system("cls");lab35();Sleep(300);break;
+
+        }
+    }
+
+
+}
+void wGoreT()
+{
+
+
+    for(int i=1;i<=4; i++)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab35();Sleep(300);break;
+            case 2: system("cls");lab36();Sleep(300);break;
+            case 3: system("cls");lab37();Sleep(300);break;
+            case 4: system("cls");lab38();Sleep(300);break;
+
+
+        }
+    }
+
+
+}
+void odGoryT()
+{
+    for(int i=4;i>=1; i--)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab35();Sleep(300);break;
+            case 2: system("cls");lab36();Sleep(300);break;
+            case 3: system("cls");lab37();Sleep(300);break;
+            case 4: system("cls");lab38();Sleep(300);break;
+
+
+        }}}
+void wDolT()
+{
+
+
+    for(int i=1;i<=4; i++)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab35();Sleep(300);break;
+            case 2: system("cls");lab39();Sleep(300);break;
+            case 3: system("cls");lab40();Sleep(300);break;
+            case 4: system("cls");lab41();Sleep(300);break;
+
+
+        }
+    }
+
+
+}
+void odDoluT()
+{
+    for(int i=4;i>=1; i--)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab35();Sleep(300);break;
+            case 2: system("cls");lab39();Sleep(300);break;
+            case 3: system("cls");lab40();Sleep(300);break;
+            case 4: system("cls");lab41();Sleep(300);break;
+
+
+        }}}
+void odPrawejT2()
+{
+
+
+    for(int i=1;i<=7; i++)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab42();Sleep(300);break;
+            case 2: system("cls");lab43();Sleep(300);break;
+            case 3: system("cls");lab44();Sleep(300);break;
+            case 4: system("cls");lab45();Sleep(300);break;
+            case 5: system("cls");lab46();Sleep(300);break;
+            case 6: system("cls");lab47();Sleep(300);break;
+            case 7: system("cls");lab48();Sleep(300);break;
+
+        }
+    }
+
+
+}
+void wPrawoT2()
+{
+
+
+    for(int i=7;i>=1; i--)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab42();Sleep(300);break;
+            case 2: system("cls");lab43();Sleep(300);break;
+            case 3: system("cls");lab44();Sleep(300);break;
+            case 4: system("cls");lab45();Sleep(300);break;
+            case 5: system("cls");lab46();Sleep(300);break;
+            case 6: system("cls");lab47();Sleep(300);break;
+            case 7: system("cls");lab48();Sleep(300);break;
+
+        }
+    }
+
+
+}
+void wLewoT2()
+{
+
+
+    for(int i=1;i<=6; i++)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab48();Sleep(300);break;
+            case 2: system("cls");lab49();Sleep(300);break;
+            case 3: system("cls");lab50();Sleep(300);break;
+            case 4: system("cls");lab51();Sleep(300);break;
+            case 5: system("cls");lab52();Sleep(300);break;
+            case 6: system("cls");lab53();Sleep(300);break;
+
+
+        }
+    }
+
+
+}
+void odLewejT2()
+{
+
+
+    for(int i=6;i>=1; i--)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab48();Sleep(300);break;
+            case 2: system("cls");lab49();Sleep(300);break;
+            case 3: system("cls");lab50();Sleep(300);break;
+            case 4: system("cls");lab51();Sleep(300);break;
+            case 5: system("cls");lab52();Sleep(300);break;
+            case 6: system("cls");lab53();Sleep(300);break;
+
+
+        }
+    }
+
+
+}
+void wGoreT2()
+{
+
+
+    for(int i=1;i<=7; i++)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab48();Sleep(300);break;
+            case 2: system("cls");lab54();Sleep(300);break;
+            case 3: system("cls");lab55();Sleep(300);break;
+            case 4: system("cls");lab56();Sleep(300);break;
+            case 5: system("cls");lab57();Sleep(300);break;
+            case 6: system("cls");lab58();Sleep(300);break;
+            case 7: system("cls");lab59();Sleep(300);break;
+
+        }
+    }
+
+
+}
+void odGoryT2()
+{
+
+
+    for(int i=7;i>=1; i--)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab48();Sleep(300);break;
+            case 2: system("cls");lab54();Sleep(300);break;
+            case 3: system("cls");lab55();Sleep(300);break;
+            case 4: system("cls");lab56();Sleep(300);break;
+            case 5: system("cls");lab57();Sleep(300);break;
+            case 6: system("cls");lab58();Sleep(300);break;
+            case 7: system("cls");lab59();Sleep(300);break;
+
+        }
+    }
+
+
+}
+void odLewejT3()
+{
+
+
+    for(int i=1;i<=6; i++)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab60();Sleep(300);break;
+            case 2: system("cls");lab61();Sleep(300);break;
+            case 3: system("cls");lab62();Sleep(300);break;
+            case 4: system("cls");lab63();Sleep(300);break;
+            case 5: system("cls");lab64();Sleep(300);break;
+            case 6: system("cls");lab65();Sleep(300);break;
+
+        }
+    }
+
+
+}
+void wLewoT3()
+{
+
+
+    for(int i=6;i>=1; i--)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab60();Sleep(300);break;
+            case 2: system("cls");lab61();Sleep(300);break;
+            case 3: system("cls");lab62();Sleep(300);break;
+            case 4: system("cls");lab63();Sleep(300);break;
+            case 5: system("cls");lab64();Sleep(300);break;
+            case 6: system("cls");lab65();Sleep(300);break;
+
+        }
+    }
+
+
+}
+void wGoreT3()
+{
+
+
+    for(int i=1;i<=7; i++)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab65();Sleep(300);break;
+            case 2: system("cls");lab66();Sleep(300);break;
+            case 3: system("cls");lab67();Sleep(300);break;
+            case 4: system("cls");lab68();Sleep(300);break;
+            case 5: system("cls");lab69();Sleep(300);break;
+            case 6: system("cls");lab70();Sleep(300);break;
+            case 7: system("cls");lab71();Sleep(300);break;
+
+        }
+    }
+}
+void odGoryT3()
+{
+
+
+    for(int i=7;i>=1; i--)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab65();Sleep(300);break;
+            case 2: system("cls");lab66();Sleep(300);break;
+            case 3: system("cls");lab67();Sleep(300);break;
+            case 4: system("cls");lab68();Sleep(300);break;
+            case 5: system("cls");lab69();Sleep(300);break;
+            case 6: system("cls");lab70();Sleep(300);break;
+            case 7: system("cls");lab71();Sleep(300);break;
+
+        }
+    }
+}
+void wDolT3()
+{
+
+
+    for(int i=1;i<=7; i++)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab65();Sleep(300);break;
+            case 2: system("cls");lab72();Sleep(300);break;
+            case 3: system("cls");lab73();Sleep(300);break;
+            case 4: system("cls");lab74();Sleep(300);break;
+            case 5: system("cls");lab75();Sleep(300);break;
+            case 6: system("cls");lab76();Sleep(300);break;
+            case 7: system("cls");lab77();Sleep(300);break;
+
+        }
+    }
+}
+void odDoluT3()
+{
+
+
+    for(int i=7;i>=1; i--)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab65();Sleep(300);break;
+            case 2: system("cls");lab72();Sleep(300);break;
+            case 3: system("cls");lab73();Sleep(300);break;
+            case 4: system("cls");lab74();Sleep(300);break;
+            case 5: system("cls");lab75();Sleep(300);break;
+            case 6: system("cls");lab76();Sleep(300);break;
+            case 7: system("cls");lab77();Sleep(300);break;
+
+        }
+    }
+}
+void odDoluT4()
+{
+
+    for(int i=1;i<=7; i++)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab78();Sleep(300);break;
+            case 2: system("cls");lab79();Sleep(300);break;
+            case 3: system("cls");lab80();Sleep(300);break;
+            case 4: system("cls");lab81();Sleep(300);break;
+            case 5: system("cls");lab82();Sleep(300);break;
+            case 6: system("cls");lab83();Sleep(300);break;
+            case 7: system("cls");lab84();Sleep(300);break;
+        }
+    }
+
+
+}
+void wDolT4()
+{
+
+    for(int i=7;i>=1; i--)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab78();Sleep(300);break;
+            case 2: system("cls");lab79();Sleep(300);break;
+            case 3: system("cls");lab80();Sleep(300);break;
+            case 4: system("cls");lab81();Sleep(300);break;
+            case 5: system("cls");lab82();Sleep(300);break;
+            case 6: system("cls");lab83();Sleep(300);break;
+            case 7: system("cls");lab84();Sleep(300);break;
+        }
+    }
+
+
+}
+void wPrawoT4()
+{
+
+    for(int i=1;i<=8; i++)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab84();Sleep(300);break;
+            case 2: system("cls");lab85();Sleep(300);break;
+            case 3: system("cls");lab86();Sleep(300);break;
+            case 4: system("cls");lab87();Sleep(300);break;
+            case 5: system("cls");lab88();Sleep(300);break;
+            case 6: system("cls");lab89();Sleep(300);break;
+            case 7: system("cls");lab90();Sleep(300);break;
+            case 8: system("cls");lab91();Sleep(300);break;
+
+        }
+    }
+
+
+}
+void odPrawejT4()
+{
+
+    for(int i=8;i>=1; i--)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab84();Sleep(300);break;
+            case 2: system("cls");lab85();Sleep(300);break;
+            case 3: system("cls");lab86();Sleep(300);break;
+            case 4: system("cls");lab87();Sleep(300);break;
+            case 5: system("cls");lab88();Sleep(300);break;
+            case 6: system("cls");lab89();Sleep(300);break;
+            case 7: system("cls");lab90();Sleep(300);break;
+            case 8: system("cls");lab91();Sleep(300);break;
+
+        }
+    }
+
+
+}
+void wLewoT4()
+{
+
+    for(int i=1;i<=7; i++)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab84();Sleep(300);break;
+            case 2: system("cls");lab92();Sleep(300);break;
+            case 3: system("cls");lab93();Sleep(300);break;
+            case 4: system("cls");lab94();Sleep(300);break;
+            case 5: system("cls");lab95();Sleep(300);break;
+            case 6: system("cls");lab96();Sleep(300);break;
+            case 7: system("cls");lab97();Sleep(300);break;
+
+        }
+    }
+
+
+}
+void odLewejT4()
+{
+
+    for(int i=7;i>=1; i--)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab84();Sleep(300);break;
+            case 2: system("cls");lab92();Sleep(300);break;
+            case 3: system("cls");lab93();Sleep(300);break;
+            case 4: system("cls");lab94();Sleep(300);break;
+            case 5: system("cls");lab95();Sleep(300);break;
+            case 6: system("cls");lab96();Sleep(300);break;
+            case 7: system("cls");lab97();Sleep(300);break;
+
+        }
+    }
+
+
+}
+void zLewejL1()
+{
+
+
+    for(int i=1;i<=9; i++)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab98();Sleep(300);break;
+            case 2: system("cls");lab99();Sleep(300);break;
+            case 3: system("cls");lab99i();Sleep(300);break;
+            case 4: system("cls");lab100();Sleep(300);break;
+            case 5: system("cls");lab101();Sleep(300);break;
+            case 6: system("cls");lab102();Sleep(300);break;
+            case 7: system("cls");lab103();Sleep(300);break;
+            case 8: system("cls");lab104();Sleep(300);break;
+            case 9: system("cls");lab104i();Sleep(300);break;
+        }
+    }
+
+
+}
+void zDoluL1()
+{
+
+
+    for(int i=9;i>=1; i--)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab98();Sleep(300);break;
+            case 2: system("cls");lab99();Sleep(300);break;
+            case 3: system("cls");lab99i();Sleep(300);break;
+            case 4: system("cls");lab100();Sleep(300);break;
+            case 5: system("cls");lab101();Sleep(300);break;
+            case 6: system("cls");lab102();Sleep(300);break;
+            case 7: system("cls");lab103();Sleep(300);break;
+            case 8: system("cls");lab104();Sleep(300);break;
+            case 9: system("cls");lab104i();Sleep(300);break;
+        }
+    }
+
+
+}
+void zPrawejL2()
+{
+
+
+    for(int i=1;i<=12; i++)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab105();Sleep(300);break;
+            case 2: system("cls");lab106();Sleep(300);break;
+            case 3: system("cls");lab107();Sleep(300);break;
+            case 4: system("cls");lab108();Sleep(300);break;
+            case 5: system("cls");lab109();Sleep(300);break;
+            case 6: system("cls");lab110();Sleep(300);break;
+            case 7: system("cls");lab111();Sleep(300);break;
+            case 8: system("cls");lab112();Sleep(300);break;
+            case 9: system("cls");lab113();Sleep(300);break;
+            case 10: system("cls");lab114();Sleep(300);break;
+            case 11: system("cls");lab115();Sleep(300);break;
+            case 12: system("cls");lab116();Sleep(300);break;
+        }
+    }
+
+
+}
+void zDoluL2()
+{
+
+
+    for(int i=12;i>=11; i--)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab105();Sleep(300);break;
+            case 2: system("cls");lab106();Sleep(300);break;
+            case 3: system("cls");lab107();Sleep(300);break;
+            case 4: system("cls");lab108();Sleep(300);break;
+            case 5: system("cls");lab109();Sleep(300);break;
+            case 6: system("cls");lab110();Sleep(300);break;
+            case 7: system("cls");lab111();Sleep(300);break;
+            case 8: system("cls");lab112();Sleep(300);break;
+            case 9: system("cls");lab113();Sleep(300);break;
+            case 10: system("cls");lab114();Sleep(300);break;
+            case 11: system("cls");lab115();Sleep(300);break;
+            case 12: system("cls");lab116();Sleep(300);break;
+        }
+    }
+
+
+}
+void zGoryL3()
+{
+
+
+    for(int i=1;i<=11; i++)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab117();Sleep(300);break;
+            case 2: system("cls");lab118();Sleep(300);break;
+            case 3: system("cls");lab119();Sleep(300);break;
+            case 4: system("cls");lab120();Sleep(300);break;
+            case 5: system("cls");lab121();Sleep(300);break;
+            case 6: system("cls");lab122();Sleep(300);break;
+            case 7: system("cls");lab123();Sleep(300);break;
+            case 8: system("cls");lab124();Sleep(300);break;
+            case 9: system("cls");lab125();Sleep(300);break;
+            case 10: system("cls");lab126();Sleep(300);break;
+            case 11: system("cls");lab127();Sleep(300);break;
+
+        }
+    }
+
+
+}
+void zPrawejL3()
+{
+
+
+    for(int i=11;i>=1; i--)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab117();Sleep(300);break;
+            case 2: system("cls");lab118();Sleep(300);break;
+            case 3: system("cls");lab119();Sleep(300);break;
+            case 4: system("cls");lab120();Sleep(300);break;
+            case 5: system("cls");lab121();Sleep(300);break;
+            case 6: system("cls");lab122();Sleep(300);break;
+            case 7: system("cls");lab123();Sleep(300);break;
+            case 8: system("cls");lab124();Sleep(300);break;
+            case 9: system("cls");lab125();Sleep(300);break;
+            case 10: system("cls");lab126();Sleep(300);break;
+            case 11: system("cls");lab127();Sleep(300);break;
+
+        }
+    }
+
+
+}
+void zGoryL4()
+{
+
+
+    for(int i=1;i<=12; i++)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab128();Sleep(300);break;
+            case 2: system("cls");lab129();Sleep(300);break;
+            case 3: system("cls");lab130();Sleep(300);break;
+            case 4: system("cls");lab131();Sleep(300);break;
+            case 5: system("cls");lab132();Sleep(300);break;
+            case 6: system("cls");lab133();Sleep(300);break;
+            case 7: system("cls");lab134();Sleep(300);break;
+            case 8: system("cls");lab135();Sleep(300);break;
+            case 9: system("cls");lab136();Sleep(300);break;
+            case 10: system("cls");lab137();Sleep(300);break;
+            case 11: system("cls");lab138();Sleep(300);break;
+            case 12: system("cls");lab139();Sleep(300);break;
+
+        }
+    }
+
+
+}
+void zLewejL4()
+{
+
+
+    for(int i=12;i>=1; i--)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab128();Sleep(300);break;
+            case 2: system("cls");lab129();Sleep(300);break;
+            case 3: system("cls");lab130();Sleep(300);break;
+            case 4: system("cls");lab131();Sleep(300);break;
+            case 5: system("cls");lab132();Sleep(300);break;
+            case 6: system("cls");lab133();Sleep(300);break;
+            case 7: system("cls");lab134();Sleep(300);break;
+            case 8: system("cls");lab135();Sleep(300);break;
+            case 9: system("cls");lab136();Sleep(300);break;
+            case 10: system("cls");lab137();Sleep(300);break;
+            case 11: system("cls");lab138();Sleep(300);break;
+            case 12: system("cls");lab139();Sleep(300);break;
+
+        }
+    }
+
+
+}
+void U1()
+{
+
+
+    for(int i=1;i<=6; i++)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab140();Sleep(300);break;
+            case 2: system("cls");lab141();Sleep(300);break;
+            case 3: system("cls");lab142();Sleep(300);break;
+            case 4: system("cls");lab143();Sleep(300);break;
+            case 5: system("cls");lab144();Sleep(300);break;
+            case 6: system("cls");lab145();Sleep(300);break;
+
+        }}
+
+      for(int i=6;i>=1; i--)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab140();Sleep(300);break;
+            case 2: system("cls");lab141();Sleep(300);break;
+            case 3: system("cls");lab142();Sleep(300);break;
+            case 4: system("cls");lab143();Sleep(300);break;
+            case 5: system("cls");lab144();Sleep(300);break;
+            case 6: system("cls");lab145();Sleep(300);break;
+
+        }
+    }
+
+
+}
+void U2()
+{
+
+
+    for(int i=1;i<=5; i++)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab146();Sleep(300);break;
+            case 2: system("cls");lab147();Sleep(300);break;
+            case 3: system("cls");lab148();Sleep(300);break;
+            case 4: system("cls");lab149();Sleep(300);break;
+            case 5: system("cls");lab150();Sleep(300);break;
+
+
+        }}
+
+      for(int i=5;i>=1; i--)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab146();Sleep(300);break;
+            case 2: system("cls");lab147();Sleep(300);break;
+            case 3: system("cls");lab148();Sleep(300);break;
+            case 4: system("cls");lab149();Sleep(300);break;
+            case 5: system("cls");lab150();Sleep(300);break;
+
+        }
+    }
+
+
+}
+void U3()
+{
+
+
+    for(int i=1;i<=6; i++)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab151();Sleep(300);break;
+            case 2: system("cls");lab152();Sleep(300);break;
+            case 3: system("cls");lab153();Sleep(300);break;
+            case 4: system("cls");lab154();Sleep(300);break;
+            case 5: system("cls");lab155();Sleep(300);break;
+            case 6: system("cls");lab156();Sleep(300);break;
+
+        }}
+
+      for(int i=6;i>=1; i--)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab151();Sleep(300);break;
+            case 2: system("cls");lab152();Sleep(300);break;
+            case 3: system("cls");lab153();Sleep(300);break;
+            case 4: system("cls");lab154();Sleep(300);break;
+            case 5: system("cls");lab155();Sleep(300);break;
+            case 6: system("cls");lab156();Sleep(300);break;
+
+        }
+    }
+
+
+}
+void U4()
+{
+
+
+    for(int i=1;i<=5; i++)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab157();Sleep(300);break;
+            case 2: system("cls");lab158();Sleep(300);break;
+            case 3: system("cls");lab159();Sleep(300);break;
+            case 4: system("cls");lab160();Sleep(300);break;
+            case 5: system("cls");lab161();Sleep(300);break;
+
+
+        }}
+
+      for(int i=5;i>=1; i--)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab157();Sleep(300);break;
+            case 2: system("cls");lab158();Sleep(300);break;
+            case 3: system("cls");lab159();Sleep(300);break;
+            case 4: system("cls");lab160();Sleep(300);break;
+            case 5: system("cls");lab161();Sleep(300);break;
+
+        }
+    }
+
+
+}
+void Boss1()
+{
+
+
+    for(int i=1;i<=4; i++)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab162();Sleep(300);break;
+            case 2: system("cls");lab163();Sleep(300);break;
+            case 3: system("cls");lab164();Sleep(300);break;
+            case 4: system("cls");lab165();Sleep(300);break;
+
+        }
+    }
+
+
+}
+void Boss2()
+{
+
+
+    for(int i=4;i>=1; i--)
+
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab162();Sleep(300);break;
+            case 2: system("cls");lab163();Sleep(300);break;
+            case 3: system("cls");lab164();Sleep(300);break;
+            case 4: system("cls");lab165();Sleep(300);break;
+
+        }
+    }
+
+
+}
+void Boss3()
+{
+
+
+    for(int i=1;i<=6; i++)
+    {
+        switch(i)
+        {
+            case 1: system("cls");lab166();Sleep(300);break;
+            case 2: system("cls");lab167();Sleep(300);break;
+            case 3: system("cls");lab168();Sleep(300);break;
+            case 4: system("cls");lab169();Sleep(300);break;
+            case 5: system("cls");lab170();Sleep(300);break;
+            case 6: system("cls");lab171();Sleep(1000);break;
+
+        }
+    }
+
+
+}
+void sala1()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 1:odPrawejT2();break;
+case 2:odLewejT2();break;
+case 3:odGoryT2();break;
+
+    }
+CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%101;}
+if (d<=33){wPrawoT2();sala=6;strona=2;}
+if ((d>33)&&(d<=66)){wGoreT2();sala=2;strona=4;}
+if (d>66){wLewoT2();sala=4;strona=1;}
+
+
+}
+void sala2()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 1:odPrawej();break;
+case 2:odLewej();break;
+case 3:odGory();break;
+case 4:odDolu();break;
+    }
+    CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=25){wDol();sala=1;strona=3;}
+if ((d>25)&&(d<=50)){wGore();sala=8;strona=4;}
+if ((d>50)&&(d<=75)){wLewo();sala=3;strona=1;}
+if (d>75){wPrawo();sala=5;strona=2;}
+
+}
+void sala3()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 1:odPrawejT();break;
+case 3:odGoryT();break;
+case 4:odDoluT();break;
+
+    }
+CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=33){wPrawoT();sala=2;strona=2;}
+if ((d>33)&&(d<=66)){wGoreT();sala=10;strona=4;}
+if (d>66){wDolT();sala=4;strona=3;}
+
+}
+void sala4()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 1:odPrawejT();break;
+case 3:odGoryT();break;
+case 4:odDoluT();break;
+    }
+CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=33){wPrawoT();sala=1;strona=2;}
+if ((d>33)&&(d<=66)){wGoreT();sala=3;strona=4;}
+if (d>66){wDolT();sala=9;strona=3;}
+
+}
+void sala5()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 1:odPrawej();break;
+case 2:odLewej();break;
+case 3:odGory();break;
+case 4:odDolu();break;
+    }
+CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=25){wDol();sala=6;strona=3;}
+if ((d>25)&&(d<=50)){wGore();sala=17;strona=4;}
+if ((d>50)&&(d<=75)){wLewo();sala=2;strona=1;}
+if (d>75){wPrawo();sala=29;strona=2;}
+}
+void sala6()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 1:odPrawej();break;
+case 2:odLewej();break;
+case 3:odGory();break;
+case 4:odDolu();break;
+    }
+CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=25){wDol();sala=40;strona=3;}
+if ((d>25)&&(d<=50)){wGore();sala=29;strona=4;}
+if ((d>50)&&(d<=75)){wLewo();sala=1;strona=1;}
+if (d>75){wPrawo();sala=43;strona=2;}
+}
+void sala8()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 2:odLewejT3();break;
+case 3:odGoryT3();break;
+case 4:odDoluT3();break;
+    }
+CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=33){wLewoT3();sala=10;strona=1;}
+if ((d>33)&&(d<=66)){wGoreT3();sala=19;strona=4;}
+if (d>66){wDolT3();sala=2;strona=3;}
+
+}
+void sala9()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 1:odPrawej();break;
+case 2:odLewej();break;
+case 3:odGory();break;
+case 4:odDolu();break;
+    }
+CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=25){wDol();sala=14;strona=3;}
+if ((d>25)&&(d<=50)){wGore();sala=4;strona=4;}
+if ((d>50)&&(d<=75)){wLewo();sala=12;strona=1;}
+if (d>75){wPrawo();sala=39;strona=2;}
+}
+void sala10()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 1:odPrawejT4();break;
+case 2:odLewejT4();break;
+case 4:odDoluT4();break;
+    }
+CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=33){wLewoT4();sala=11;strona=1;}
+if ((d>33)&&(d<=66)){wPrawoT4();sala=8;strona=2;}
+if (d>66){wDolT4();sala=3;strona=3;}
+
+}
+int sala11()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 1:odPrawejT();break;
+case 3:odGoryT();break;
+case 4:odDoluT();break;
+
+    }
+CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=33){wPrawoT();sala=10;strona=2;}
+if ((d>33)&&(d<=66)){wGoreT();sala=21;strona=4;}
+if (d>66){wDolT();sala=27;strona=3;}
+
+}
+void sala12()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 1:odPrawejT();break;
+case 3:odGoryT();break;
+case 4:odDoluT();break;
+    }
+CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=33){wPrawoT();sala=9;strona=2;}
+if ((d>33)&&(d<=66)){wGoreT();sala=27;strona=4;}
+if (d>66){wDolT();sala=13;strona=3;}
+
+}
+void sala13()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+
+case 1:zPrawejL3();sala=12;strona=4;break;
+case 3:zGoryL3();sala=14;strona=2;break;
+
+    }
+
+}
+void sala14()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 1:odPrawejT2();break;
+case 2:odLewejT2();break;
+case 3:odGoryT2();break;
+
+    }
+CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=33){wLewoT2();sala=13;strona=1;}
+if ((d>33)&&(d<=66)){wGoreT2();sala=9;strona=4;}
+if (d>66){wPrawoT2();sala=15;strona=2;}
+
+}
+void sala15()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 1:odPrawejT2();break;
+case 2:odLewejT2();break;
+case 3:odGoryT2();break;
+
+    }
+CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=33){wLewoT2();sala=14;strona=1;}
+if ((d>33)&&(d<=66)){wGoreT2();sala=39;strona=4;}
+if (d>66){wPrawoT2();sala=16;strona=2;}
+
+}
+void sala16()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+U1();sala=15;strona=1;
+}
+int sala17()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 1:odPrawejT();break;
+case 3:odGoryT();break;
+case 4:odDoluT();break;
+
+    }
+CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=33){wPrawoT();sala=30;strona=2;}
+if ((d>33)&&(d<=66)){wGoreT();sala=18;strona=4;}
+if (d>66){wDolT();sala=5;strona=3;}
+
+}
+int sala18()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 1:odPrawej();break;
+case 2:odLewej();break;
+case 3:odGory();break;
+case 4:odDolu();break;
+    }CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=25){wDol();sala=17;strona=3;}
+if ((d>25)&&(d<=50)){wGore();sala=26;strona=4;}
+if ((d>50)&&(d<=75)){wLewo();sala=19;strona=1;}
+if (d>75){wPrawo();sala=31;strona=2;}
+
+}
+void sala19()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 1:odPrawejT4();break;
+case 2:odLewejT4();break;
+case 4:odDoluT4();break;
+    }
+CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=33){wLewoT4();sala=20;strona=1;}
+if ((d>33)&&(d<=66)){wPrawoT4();sala=18;strona=2;}
+if (d>66){wDolT4();sala=8;strona=3;}
+
+}
+int sala20()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 1:odPrawejT2();break;
+case 2:odLewejT2();break;
+case 3:odGoryT2();break;
+
+    }
+CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=33){wPrawoT2();sala=19;strona=2;}
+if ((d>33)&&(d<=66)){wGoreT2();sala=23;strona=4;}
+if (d>66){wLewoT2();sala=21;strona=1;}
+
+
+}
+int sala21()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 1:odPrawejT();break;
+case 3:odGoryT();break;
+case 4:odDoluT();break;
+
+    }
+CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=33){wPrawoT();sala=20;strona=2;}
+if ((d>33)&&(d<=66)){wGoreT();sala=22;strona=4;}
+if (d>66){wDolT();sala=11;strona=3;}
+
+}
+void sala22()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 1:zPrawejL2();sala=21;strona=3;break;
+case 4:zDoluL2();sala=23;strona=2;break;
+
+    }
+}
+void sala23()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 1:odPrawej();break;
+case 2:odLewej();break;
+case 3:odGory();break;
+case 4:odDolu();break;
+    }CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=25){wDol();sala=20;strona=3;}
+if ((d>25)&&(d<=50)){wGore();sala=79;strona=4;}
+if ((d>50)&&(d<=75)){wLewo();sala=22;strona=1;}
+if (d>75){wPrawo();sala=24;strona=2;}
+
+}
+void sala24()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 1:odPrawejT4();break;
+case 2:odLewejT4();break;
+case 4:odDoluT4();break;
+    }
+CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=33){wLewoT4();sala=23;strona=1;}
+if ((d>33)&&(d<=66)){wPrawoT4();sala=26;strona=2;}
+if (d>66){wDolT4();sala=25;strona=3;}
+
+}
+void sala25()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+U4();sala=24;strona=4;
+}
+void sala26()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 2:odLewejT3();break;
+case 3:odGoryT3();break;
+case 4:odDoluT3();break;
+    }
+CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=33){wLewoT3();sala=24;strona=1;}
+if ((d>33)&&(d<=66)){wGoreT3();sala=75;strona=4;}
+if (d>66){wDolT3();sala=18;strona=3;}
+
+}
+void sala27()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 2:odLewejT3();break;
+case 3:odGoryT3();break;
+case 4:odDoluT3();break;
+    }
+CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=33){wLewoT3();sala=28;strona=1;}
+if ((d>33)&&(d<=66)){wGoreT3();sala=11;strona=4;}
+if (d>66){wDolT3();sala=12;strona=3;}
+
+}
+void sala28()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+U3();sala=27;strona=2;
+}
+void sala29()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 1:odPrawej();break;
+case 2:odLewej();break;
+case 3:odGory();break;
+case 4:odDolu();break;
+    }CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=25){wDol();sala=6;strona=3;}
+if ((d>25)&&(d<=50)){wGore();sala=30;strona=4;}
+if ((d>50)&&(d<=75)){wLewo();sala=5;strona=1;}
+if (d>75){wPrawo();sala=38;strona=2;}
+
+}
+void sala30()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 2:odLewejT3();break;
+case 3:odGoryT3();break;
+case 4:odDoluT3();break;
+    }
+CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=33){wLewoT3();sala=17;strona=1;}
+if ((d>33)&&(d<=66)){wGoreT3();sala=31;strona=4;}
+if (d>66){wDolT3();sala=29;strona=3;}
+
+}
+void sala31()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 1:odPrawejT4();break;
+case 2:odLewejT4();break;
+case 4:odDoluT4();break;
+    }
+CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=33){wLewoT4();sala=18;strona=1;}
+if ((d>33)&&(d<=66)){wPrawoT4();sala=32;strona=2;}
+if (d>66){wDolT4();sala=30;strona=3;}
+
+}
+void sala32()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 1:odPrawej();break;
+case 2:odLewej();break;
+case 3:odGory();break;
+case 4:odDolu();break;
+    }CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=25){wDol();sala=37;strona=3;}
+if ((d>25)&&(d<=50)){wGore();sala=33;strona=4;}
+if ((d>50)&&(d<=75)){wLewo();sala=31;strona=1;}
+if (d>75){wPrawo();sala=43;strona=2;}
+
+}
+void sala33()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 2:odLewejT3();break;
+case 3:odGoryT3();break;
+case 4:odDoluT3();break;
+    }
+CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=33){wLewoT3();sala=34;strona=1;}
+if ((d>33)&&(d<=66)){wGoreT3();sala=72;strona=4;}
+if (d>66){wDolT3();sala=32;strona=3;}
+
+}
+void sala34()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 1:odPrawejT2();break;
+case 2:odLewejT2();break;
+case 3:odGoryT2();break;
+
+    }
+CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=33){wPrawoT2();sala=33;strona=2;}
+if ((d>33)&&(d<=66)){wGoreT2();sala=36;strona=4;}
+if (d>66){wLewoT2();sala=35;strona=1;}
+
+
+}
+void sala35()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+U3();sala=34;strona=2;
+}
+void sala36()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+U2();sala=34;strona=3;
+}
+void sala37()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 1:odPrawejT();break;
+case 3:odGoryT();break;
+case 4:odDoluT();break;
+
+    }
+CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=33){wPrawoT();sala=52;strona=2;}
+if ((d>33)&&(d<=66)){wGoreT();sala=32;strona=4;}
+if (d>66){wDolT();sala=38;strona=3;}
+
+}
+void sala38()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 2:odLewejT3();break;
+case 3:odGoryT3();break;
+case 4:odDoluT3();break;
+    }
+CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=33){wLewoT3();sala=29;strona=1;}
+if ((d>33)&&(d<=66)){wGoreT3();sala=37;strona=4;}
+if (d>66){wDolT3();sala=43;strona=3;}
+
+}
+void sala39()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 2:odLewejT3();break;
+case 3:odGoryT3();break;
+case 4:odDoluT3();break;
+    }
+CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=33){wLewoT3();sala=9;strona=1;}
+if ((d>33)&&(d<=66)){wGoreT3();sala=5;strona=4;}
+if (d>66){wDolT3();sala=15;strona=3;}
+
+}
+int sala40()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 1:odPrawejT();break;
+case 3:odGoryT();break;
+case 4:odDoluT();break;
+
+    }
+
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=33){wPrawoT();sala=44;strona=2;}
+if ((d>33)&&(d<=66)){wGoreT();sala=6;strona=4;}
+if (d>66){wDolT();sala=41;strona=3;}
+
+}
+void sala41()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+
+case 2:zLewejL4();sala=12;strona=4;break;
+case 3:zGoryL4();sala=42;strona=1;break;
+
+    }
+
+}
+void sala42()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+U3();sala=41;strona=2;
+}
+void sala43()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+
+case 1:zLewejL4();sala=12;strona=4;break;
+case 3:zGoryL3();sala=14;strona=2;break;
+
+    }
+
+}
+void sala44()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 2:odLewejT3();break;
+case 3:odGoryT3();break;
+case 4:odDoluT3();break;
+    }
+CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=33){wLewoT3();sala=40;strona=1;}
+if ((d>33)&&(d<=66)){wGoreT3();sala=45;strona=4;}
+if (d>66){wDolT3();sala=47;strona=3;}
+
+}
+void sala45()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+
+case 1:zPrawejL2();sala=44;strona=3;break;
+case 4:zDoluL2();sala=46;strona=2;break;
+
+    }
+
+}
+void sala46()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+
+case 2:zLewejL4();sala=48;strona=3;break;
+case 3:zGoryL3();sala=45;strona=1;break;
+
+    }
+
+}
+void sala47()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+U4();sala=44;strona=4;
+}
+void sala48()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 1:odPrawejT();break;
+case 3:odGoryT();break;
+case 4:odDoluT();break;
+
+    }
+CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=33){wPrawoT();sala=49;strona=2;}
+if ((d>33)&&(d<=66)){wGoreT();sala=51;strona=4;}
+if (d>66){wDolT();sala=46;strona=3;}
+
+}
+void sala49()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 2:odLewejT3();break;
+case 3:odGoryT3();break;
+case 4:odDoluT3();break;
+    }
+CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=33){wLewoT3();sala=48;strona=1;}
+if ((d>33)&&(d<=66)){wGoreT3();sala=55;strona=4;}
+if (d>66){wDolT3();sala=50;strona=3;}
+
+}
+void sala50()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+U4();sala=44;strona=4;
+}
+void sala51()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 1:odPrawejT();break;
+case 3:odGoryT();break;
+case 4:odDoluT();break;
+
+    }
+CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=33){wPrawoT();sala=55;strona=2;}
+if ((d>33)&&(d<=66)){wGoreT();sala=52;strona=4;}
+if (d>66){wDolT();sala=48;strona=3;}
+
+}
+void sala52()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 1:odPrawej();break;
+case 2:odLewej();break;
+case 3:odGory();break;
+case 4:odDolu();break;
+    }CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=25){wDol();sala=51;strona=3;}
+if ((d>25)&&(d<=50)){wGore();sala=53;strona=4;}
+if ((d>50)&&(d<=75)){wLewo();sala=37;strona=1;}
+if (d>75){wPrawo();sala=54;strona=2;}
+
+}
+void sala53()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 1:odPrawejT4();break;
+case 2:odLewejT4();break;
+case 4:odDoluT4();break;
+    }
+CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=33){wLewoT4();sala=32;strona=1;}
+if ((d>33)&&(d<=66)){wPrawoT4();sala=56;strona=2;}
+if (d>66){wDolT4();sala=52;strona=3;}
+
+}
+void sala54()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 2:odLewejT3();break;
+case 3:odGoryT3();break;
+case 4:odDoluT3();break;
+    }
+CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=33){wLewoT3();sala=52;strona=1;}
+if ((d>33)&&(d<=66)){wGoreT3();sala=56;strona=4;}
+if (d>66){wDolT3();sala=55;strona=3;}
+
+}
+void sala55()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 1:odPrawej();break;
+case 2:odLewej();break;
+case 3:odGory();break;
+case 4:odDolu();break;
+    }CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=25){wDol();sala=49;strona=3;}
+if ((d>25)&&(d<=50)){wGore();sala=54;strona=4;}
+if ((d>50)&&(d<=75)){wLewo();sala=51;strona=1;}
+if (d>75){wPrawo();sala=66;strona=2;}
+
+}
+void sala56()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 1:odPrawej();break;
+case 2:odLewej();break;
+case 3:odGory();break;
+case 4:odDolu();break;
+    }
+CzyWalcze();srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=25){wDol();sala=54;strona=3;}
+if ((d>25)&&(d<=50)){wGore();sala=57;strona=4;}
+if ((d>50)&&(d<=75)){wLewo();sala=53;strona=1;}
+if (d>75){wPrawo();sala=63;strona=2;}
+
+}
+void sala57()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 2:odLewejT3();break;
+case 3:odGoryT3();break;
+case 4:odDoluT3();break;
+    }
+CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=33){wLewoT3();sala=58;strona=1;}
+if ((d>33)&&(d<=66)){wGoreT3();sala=60;strona=4;}
+if (d>66){wDolT3();sala=56;strona=3;}
+
+}
+void sala58()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+
+case 1:zPrawejL3();sala=59;strona=4;break;
+case 3:zGoryL3();sala=57;strona=2;break;
+
+    }
+
+}
+
+void sala59()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 1:odPrawej();break;
+case 2:odLewej();break;
+case 3:odGory();break;
+case 4:odDolu();break;
+    }CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=25){wDol();sala=58;strona=3;}
+if ((d>25)&&(d<=50)){wGore();sala=70;strona=4;}
+if ((d>50)&&(d<=75)){wLewo();sala=72;strona=1;}
+if (d>75){wPrawo();sala=60;strona=2;}
+
+}
+void sala60()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 1:odPrawejT4();break;
+case 2:odLewejT4();break;
+case 4:odDoluT4();break;
+    }CzyWalcze();
+
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=33){wLewoT4();sala=59;strona=1;}
+if ((d>33)&&(d<=66)){wPrawoT4();sala=61;strona=2;}
+if (d>66){wDolT4();sala=57;strona=3;}
+
+}
+void sala61()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+
+case 2:zLewejL1();sala=62;strona=3;break;
+case 4:zDoluL1();sala=60;strona=1;break;
+
+    }
+
+}
+void sala62()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 1:odPrawejT();break;
+case 3:odGoryT();break;
+case 4:odDoluT();break;
+
+    }
+CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=33){wPrawoT();sala=67;strona=2;}
+if ((d>33)&&(d<=66)){wGoreT();sala=61;strona=4;}
+if (d>66){wDolT();sala=63;strona=3;}
+
+}
+void sala63()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 2:odLewejT3();break;
+case 3:odGoryT3();break;
+case 4:odDoluT3();break;
+    }
+CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=33){wLewoT3();sala=56;strona=1;}
+if ((d>33)&&(d<=66)){wGoreT3();sala=62;strona=4;}
+if (d>66){wDolT3();sala=64;strona=3;}
+
+}
+void sala64()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 1:odPrawejT();break;
+case 3:odGoryT();break;
+case 4:odDoluT();break;
+
+    }
+CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=33){wPrawoT();sala=65;strona=2;}
+if ((d>33)&&(d<=66)){wGoreT();sala=63;strona=4;}
+if (d>66){wDolT();sala=66;strona=3;}
+
+}
+void sala65()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+U1();sala=64;strona=1;
+}
+void sala66()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+
+case 2:zLewejL4();sala=64;strona=4;break;
+case 3:zGoryL4();sala=55;strona=1;break;
+
+    }
+}
+void sala67()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+
+case 2:zLewejL1();sala=68;strona=3;break;
+case 4:zDoluL1();sala=62;strona=1;break;
+
+    }
+}
+void sala68()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+
+case 1:zPrawejL3();sala=67;strona=4;break;
+case 3:zGoryL3();sala=69;strona=2;break;
+
+    }
+}
+void sala69()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+
+case 2:zLewejL4();sala=7;strona=4;break;
+case 3:zGoryL4();sala=68;strona=1;break;
+
+    }
+}
+void sala70()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+
+case 1:zPrawejL2();sala=59;strona=3;break;
+case 4:zDoluL2();sala=71;strona=2;break;
+
+    }
+}
+void sala71()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+U1();sala=70;strona=1;
+}
+void sala72()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 1:odPrawejT4();break;
+case 2:odLewejT4();break;
+case 4:odDoluT4();break;
+    }
+CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=33){wLewoT4();sala=73;strona=1;}
+if ((d>33)&&(d<=66)){wPrawoT4();sala=59;strona=2;}
+if (d>66){wDolT4();sala=33;strona=3;}
+
+}
+void sala73()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 1:odPrawejT2();break;
+case 2:odLewejT2();break;
+case 3:odGoryT2();break;
+
+    }
+CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=33){wPrawoT2();sala=72;strona=2;}
+if ((d>33)&&(d<=66)){wGoreT2();sala=74;strona=4;}
+if (d>66){wLewoT2();sala=75;strona=1;}
+
+
+}
+void sala74()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+U2();sala=73;strona=3;
+}
+void sala75()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 1:odPrawej();break;
+case 2:odLewej();break;
+case 3:odGory();break;
+case 4:odDolu();break;
+    }CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=25){wDol();sala=26;strona=3;}
+if ((d>25)&&(d<=50)){wGore();sala=76;strona=4;}
+if ((d>50)&&(d<=75)){wLewo();sala=78;strona=1;}
+if (d>75){wPrawo();sala=73;strona=2;}
+
+}
+void sala76()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+
+case 2:zLewejL1();sala=75;strona=3;break;
+case 4:zDoluL1();sala=77;strona=1;break;
+
+    }
+}
+void sala77()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+
+case 1:zPrawejL2();sala=78;strona=3;break;
+case 4:zDoluL2();sala=76;strona=2;break;
+
+    }
+}
+void sala78()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+case 1:odPrawejT2();break;
+case 2:odLewejT2();break;
+case 3:odGoryT2();break;
+
+    }
+CzyWalcze();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d = rand()%100+1;}
+if (d<=33){wPrawoT2();sala=75;strona=2;}
+if ((d>33)&&(d<=66)){wGoreT2();sala=77;strona=4;}
+if (d>66){wLewoT2();sala=79;strona=1;}
+
+
+}
+void sala79()
+{cout<<"Room: "<<sala<<endl;
+Sleep(1000);
+    switch(strona)
+    {
+
+case 1:zPrawejL2();sala=23;strona=3;break;
+case 4:zDoluL2();sala=78;strona=2;break;
+
+    }
+}
+void sala7()
+{cout<<"Boss Room!"<<endl;
+Sleep(1000);
+
+Boss1();
+if(klucz==1){Boss3();walka_z_bossem();Boss2();sala=69;strona=3;klucz==0;}
+else {cout<<"Najpierw musisz zdobyc klucz!"<<endl;Sleep(1400);
+            Boss2();sala=69;strona=3;}
+
+}
+
+void Labirynt()
+{cos=1;
+
+if (sala==0) {odDolu();
+srand(time(NULL));
+for(int i=1;i<=10; i++){d =55;}//rand()%100+1;}
+if (d<=25){wGore();wGore();sala=5;strona=4;}
+if ((d>25)&&(d<=50)){wGore();sala=5;strona=4;}
+if ((d>50)&&(d<=75)){wLewo(); sala=1;strona=1;}
+if (d>75){wPrawo(); sala=7;strona=2;}}
+
+
+
+while (cos<10)
+{
+
+    switch(sala)
+{
+
+case 1:     sala1();break;
+case 2:     sala2();break;
+case 3:     sala3();break;
+case 4:     sala4();break;
+case 5:     sala5();break;
+case 6:     sala6();break;
+case 7:     sala7();break;
+case 8:     sala8();break;
+case 9:     sala9();break;
+case 10:    sala10();break;
+case 11:    sala11();break;
+case 12:    sala12();break;
+case 13:    sala13();break;
+case 14:    sala14();break;
+case 15:    sala15();break;
+case 16:    sala16();break;
+case 17:    sala17();break;
+case 18:    sala18();break;
+case 19:    sala19();break;
+case 20:    sala20();break;
+case 21:    sala21();break;
+case 22:    sala22();break;
+case 23:    sala23();break;
+case 24:    sala24();break;
+case 25:    sala25();break;
+case 26:    sala26();break;
+case 27:    sala27();break;
+case 28:    sala28();break;
+case 29:    sala29();break;
+case 30:    sala30();break;
+case 31:    sala31();break;
+case 32:    sala32();break;
+case 33:    sala33();break;
+case 34:    sala34();break;
+case 35:    sala35();break;
+case 36:    sala36();break;
+case 37:    sala37();break;
+case 38:    sala38();break;
+case 39:    sala39();break;
+case 40:    sala40();break;
+case 41:    sala41();break;
+case 42:    sala42();break;
+case 43:    sala43();break;
+case 44:    sala44();break;
+case 45:    sala45();break;
+case 46:    sala46();break;
+case 47:    sala47();break;
+case 48:    sala48();break;
+case 49:    sala49();break;
+case 50:    sala50();break;
+case 51:    sala51();break;
+case 52:    sala52();break;
+case 53:    sala53();break;
+case 54:    sala54();break;
+case 55:    sala55();break;
+case 56:    sala56();break;
+case 57:    sala57();break;
+case 58:    sala58();break;
+case 59:    sala59();break;
+case 60:    sala60();break;
+case 61:    sala61();break;
+case 62:    sala62();break;
+case 63:    sala63();break;
+case 64:    sala64();break;
+case 65:    sala65();break;
+case 66:    sala66();break;
+case 67:    sala67();break;
+case 68:    sala68();break;
+case 69:    sala69();break;
+case 70:    sala70();break;
+case 71:    sala71();break;
+case 72:    sala72();break;
+case 73:    sala73();break;
+case 74:    sala74();break;
+case 75:    sala75();break;
+case 76:    sala76();break;
+case 77:    sala77();break;
+case 78:    sala78();break;
+case 79:    sala79();break;
+
+}
+}
+
+opcja=10;
+
+}
+
+
+int main()
+{
+    for(;;){
+system("cls");
+                                         if(opcja==0)
+{
+    cout<<"                                         "<<endl;
+    cout<<"               Witaj w  "<<endl;
+    cout<<"         Labiryncie Chimery!!!"<<endl;
+    cout<<"        (Wiem nazwa niszczy...)"<<endl;
+    cout<<"                                 By Stormery"<<endl;
+    cout<<"                               "<<endl;
+
+
+
+
+
+
+        cout<<"Aby rozpoczac gre wcisnij klawisz enter:"<<endl;
+        Sleep(1000); getchar();
+
+plik.open("save.txt",ios::in);
+            if(plik.good()==false){nowagra();}
+
+string linia;
+int nr_linii=1;
+        while(getline(plik,linia))
+   {
+       switch(nr_linii)
+       {
+           case 1: nick = linia;break;
+           case 2 :lvl = atoi(linia.c_str()); break;
+           case 3: bron = atoi(linia.c_str()); break;
+           case 4: hppotka = atoi(linia.c_str()); break;
+           case 5: zbroja = atoi(linia.c_str()); break;
+           case 6: obecny_xp = atoi(linia.c_str()); break;
+           case 7: scroll = atoi(linia.c_str()); break;
+           case 8: bron_enchant = atoi(linia.c_str()); break;
+           case 9: sala = atoi(linia.c_str()); break;
+           case 10: klucz = atoi(linia.c_str()); break;
+       }
+       nr_linii++;
+
+   }
+ plik.close();
+opcja=10;
+}staty();
+switch(opcja)
+{life=1;
+    case 1: cout<<"Wchodzimy do labiryntu";Sleep(2000);system("cls");opcja=12;break;
+    case 2: kowal(); break;
+    case 3: zapis(); exit(0);
+    case 10: system("cls");
+    cout<<"Menu Glowne"<<endl;
+    cout<<"1. Przeszukuj Labirynt"<<endl;
+    cout<<"2. Kowal"<<endl;
+    cout<<"3. Zapis i wyjscie z gry"<<endl;
+
+    cout<<": ";cin>>opcja;break;
+
+    case 11: walka_z_bossem();opcja=0; break;
+    case 12: Labirynt();opcja=10;break;
+    case 13: kowal(); break;
+    case 14: walka(); opcja=0;break;
+}
+
+
+
+
+
+
+
+
+
+
+
+}return 0;//////////////////////////////////////////////////////////////////////////////////////////
+}////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+int ile_xpa(int d)// trzeba tu poprawia bo jest 2 razy to samo
+{
+if(xpboss==0){for(int i=1;i<=10; i++){d = rand()%100+1;}}
+else {for(int i=1;i<=10; i++){d = rand()%1000+300;}}
+
+return d;
+}
+
+void naliczanie(int obecny_xp, int xp)
+    {
+
+    xp+=ile_xpa(xp)+(lvl*10);
+    srand(time(NULL));
+
+    for(int i=0; i<=xp; i++)
+        {
+            cout<<"Twoj poziom doswiadczenia zwieksza sie"<<endl;
+            cout<<"Zdobywasz: "<<obecny_xp+i<<" XP/"<<lvl*100<<endl;
+
+            system("cls");
+        }
+        cout<<"Twoj poziom doswiadczenia zwieksza sie"<<endl;
+    cout<<"Zdobywasz: "<<xp+obecny_xp<<" XP/"<<lvl*100<<endl;
+
+    }
+
+int random(int d )
+{
+srand(time(NULL));
+    for(int i=1;i<=10; i++){d = rand()%100+1;}
+return d;
+}
+void ulti()
+{
+                     for(int i=0; i<=3; i++)
+  {
+
+cout<<endl;
+cout<<endl;
+cout<<endl;
+cout<<endl;
+cout<<"                       Kaaaaameeee Haaaameeee!!!"<<endl;
+
+ Sleep(500);
+ system("cls");
+ Sleep(500);
+  }
+
+            for(int i=1; i<=20; i++){
+                switch(i)
+        {
+
+
+    case 1:
+      cout<<"Haaaaaa!!!"<<endl;
+        cout<<endl;
+        cout<<endl;
+    cout<<"*..*¶¶"<< endl;
+    cout<<".*.¶¶¶"<<endl;
+    cout<<" .¶¶¶¶"<<endl;
+    cout<<"¶¶¶¶¶¶¶"<<endl;
+    cout<<"¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"¶¶¶¶¶¶¶"<<endl;
+    cout<<"¶¶¶"<<endl;
+    cout<<"¶¶¶"<<endl;
+    cout<<"¶¶¶"<<endl;
+    cout<<"¶¶¶¶"<<endl;
+    cout<<"*.¶¶"<<endl;
+
+
+
+
+        Sleep(200);system("cls");break;
+    case 2:
+             cout<<"Haaaaaa!!!"<<endl;
+        cout<<endl;
+        cout<<endl;
+    cout<<"*.**..*¶¶"<< endl;
+    cout<<"*.*.*.¶¶¶"<<endl;
+    cout<<"*.*..¶¶¶¶"<<endl;
+    cout<<"¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"¶¶¶¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"¶¶¶¶¶¶"<<endl;
+    cout<<"¶¶¶¶¶¶"<<endl;
+    cout<<".*¶¶¶¶"<<endl;
+    cout<<"**.*¶¶¶"<<endl;
+    cout<<"*.*.*.¶¶"<<endl;
+Sleep(200);system("cls");break;
+    case 3:
+
+                   cout<<"Haaaaaa!!!"<<endl;
+        cout<<endl;
+        cout<<endl;
+    cout<<"*.**..*.*.¶¶"<< endl;
+    cout<<"*.*.*..*.¶¶¶"<<endl;
+    cout<<"*¶¶*.*..¶¶¶¶"<<endl;
+    cout<<"*.¶¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.*¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.*¶¶¶¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.*¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.*¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<".*.¶¶¶¶¶.*¶¶¶¶"<<endl;
+    cout<<"**¶¶.*.*.*.*¶¶¶"<<endl;
+    cout<<"*.*.*..*.*.*.*¶¶"<<endl;
+
+      Sleep(200);system("cls");break;
+    case 4:
+                           cout<<"Haaaaaa!!!"<<endl;
+        cout<<endl;
+        cout<<endl;
+    cout<<"*.*.*.**..*.*.¶¶"<< endl;
+    cout<<"*.*.*.*.*..*.¶¶¶"<<endl;
+    cout<<"*.*.*¶¶*.*..¶¶¶¶"<<endl;
+    cout<<"*.*.*.¶¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.*.*.*¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.*.*.*¶¶¶¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.*.*.*¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.*.*.*¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.*..*.¶¶¶¶¶.*¶¶¶¶"<<endl;
+    cout<<"*.*.**¶¶.*.*.*.*¶¶¶"<<endl;
+    cout<<"*.*.*.*.*..*.*.*.*¶¶"<<endl;
+     Sleep(200);system("cls");break;
+    case 5:
+                       cout<<"Haaaaaa!!!"<<endl;
+        cout<<endl;
+        cout<<endl;
+    cout<<"*.**.*.*.**..*.*.¶¶"<< endl;
+    cout<<"*.**.*.*.*.*..*.¶¶¶"<<endl;
+    cout<<"*.**.*.*¶¶*.*..¶¶¶¶"<<endl;
+    cout<<"*.**.*.*.¶¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.**.*.*.*¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.**.*.*.*¶¶¶¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.**.*.*.*¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.**.*.*.*¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.**.*..*.¶¶¶¶¶.*¶¶¶¶"<<endl;
+    cout<<"*.**.*.**¶¶.*.*.*.*¶¶¶"<<endl;
+    cout<<"*.**.*.*.*.*..*.*.*.*¶¶"<<endl;
+      Sleep(200);system("cls");break;
+    case 6:
+                              cout<<"Haaaaaa!!!"<<endl;
+        cout<<endl;
+        cout<<endl;
+    cout<<"*.**.*.*.**..*.*.¶¶"<< endl;
+    cout<<"*.**.*.*.*.*..*.¶¶¶"<<endl;
+    cout<<"*.**.*.*¶¶*.*..¶¶¶¶"<<endl;
+    cout<<"*.**.*.*.¶¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.**.*.*.*¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.**.*.*.*¶¶¶¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.**.*.*.*¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.**.*.*.*¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.**.*..*.¶¶¶¶¶.*¶¶¶¶"<<endl;
+    cout<<"*.**.*.**¶¶.*.*.*.*¶¶¶"<<endl;
+    cout<<"*.**.*.*.*.*..*.*.*.*¶¶"<<endl;
+       Sleep(200);system("cls");break;
+
+    case 7:                      cout<<"Haaaaaa!!!"<<endl;
+        cout<<endl;
+        cout<<endl;
+    cout<<"*.**.**.*.*.**..*.*.¶¶"<< endl;
+    cout<<"*.**.**.*.*.*.*..*.¶¶¶"<<endl;
+    cout<<"*.**.**.*.*¶¶*.*..¶¶¶¶"<<endl;
+    cout<<"*.**.**.*.*.¶¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.**.**.*.*.*¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.**.**.*.*.*¶¶¶¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.**.**.*.*.*¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.**.**.*.*.*¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.**.**.*..*.¶¶¶¶¶.*¶¶¶¶"<<endl;
+    cout<<"*.**.**.*.**¶¶.*.*.*.*¶¶¶"<<endl;
+    cout<<"*.**.**.*.*.*.*..*.*.*.*¶¶"<<endl;
+       Sleep(200);system("cls");break;
+
+    case 8:                    cout<<"Haaaaaa!!!"<<endl;
+        cout<<endl;
+        cout<<endl;
+    cout<<"*.**.**.**.*.*.**..*.*.¶¶"<< endl;
+    cout<<"*.**.**.**.*.*.*.*..*.¶¶¶"<<endl;
+    cout<<"*.**.**.**.*.*¶¶*.*..¶¶¶¶"<<endl;
+    cout<<"*.**.**.**.*.*.¶¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.**.**.**.*.*.*¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.**.**.**.*.*.*¶¶¶¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.**.**.**.*.*.*¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.**.**.**.*.*.*¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.**.**.**.*..*.¶¶¶¶¶.*¶¶¶¶"<<endl;
+    cout<<"*.**.**.**.*.**¶¶.*.*.*.*¶¶¶"<<endl;
+    cout<<"*.**.**.**.*.*.*.*..*.*.*.*¶¶"<<endl;
+       Sleep(200);system("cls");break;
+
+    case 9:                     cout<<"Haaaaaa!!!"<<endl;
+        cout<<endl;
+        cout<<endl;
+    cout<<"*.**.**.**.**.*.*.**..*.*.¶¶"<< endl;
+    cout<<"*.**.**.**.**.*.*.*.*..*.¶¶¶"<<endl;
+    cout<<"*.**.**.**.**.*.*¶¶*.*..¶¶¶¶"<<endl;
+    cout<<"*.**.**.**.**.*.*.¶¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.**.**.**.**.*.*.*¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.**.**.**.**.*.*.*¶¶¶¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.**.**.**.**.*.*.*¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.**.**.**.**.*.*.*¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.**.**.**.**.*..*.¶¶¶¶¶.*¶¶¶¶"<<endl;
+    cout<<"*.**.**.**.**.*.**¶¶.*.*.*.*¶¶¶"<<endl;
+    cout<<"*.**.**.**.**.*.*.*.*..*.*.*.*¶¶"<<endl;
+        Sleep(200);system("cls");break;
+
+           case 10:                      cout<<"Haaaaaa!!!"<<endl;
+        cout<<endl;
+        cout<<endl;
+    cout<<"*.***.**.**.**.**.*.*.**..*.*.¶¶"<< endl;
+    cout<<"*.***.**.**.**.**.*.*.*.*..*.¶¶¶"<<endl;
+    cout<<"*.***.**.**.**.**.*.*¶¶*.*..¶¶¶¶"<<endl;
+    cout<<"*.***.**.**.**.**.*.*.¶¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.***.**.**.**.**.*.*.*¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.***.**.**.**.**.*.*.*¶¶¶¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.***.**.**.**.**.*.*.*¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.***.**.**.**.**.*.*.*¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.***.**.**.**.**.*..*.¶¶¶¶¶.*¶¶¶¶"<<endl;
+    cout<<"*.***.**.**.**.**.*.**¶¶.*.*.*.*¶¶¶"<<endl;
+    cout<<"*.***.**.**.**.**.*.*.*.*..*.*.*.*¶¶"<<endl;
+        Sleep(200);system("cls");break;
+
+                   case 11:                     cout<<"Haaaaaa!!!"<<endl;
+        cout<<endl;
+        cout<<endl;
+    cout<<"*.***.***.**.**.**.**.*.*.**..*.*.¶¶"<< endl;
+    cout<<"*.***.***.**.**.**.**.*.*.*.*..*.¶¶¶"<<endl;
+    cout<<"*.***.***.**.**.**.**.*.*¶¶*.*..¶¶¶¶"<<endl;
+    cout<<"*.***.***.**.**.**.**.*.*.¶¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.***.***.**.**.**.**.*.*.*¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.***.***.**.**.**.**.*.*.*¶¶¶¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.***.***.**.**.**.**.*.*.*¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.***.***.**.**.**.**.*.*.*¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.***.***.**.**.**.**.*..*.¶¶¶¶¶.*¶¶¶¶"<<endl;
+    cout<<"*.***.***.**.**.**.**.*.**¶¶.*.*.*.*¶¶¶"<<endl;
+    cout<<"*.***.***.**.**.**.**.*.*.*.*..*.*.*.*¶¶"<<endl;
+        Sleep(200);system("cls");break;
+
+                   case 12:                   cout<<"Haaaaaa!!!"<<endl;
+        cout<<endl;
+        cout<<endl;
+    cout<<"*.***.***.***.**.**.**.**.*.*.**..*.*.¶¶"<< endl;
+    cout<<"*.***.***.***.**.**.**.**.*.*.*.*..*.¶¶¶"<<endl;
+    cout<<"*.***.***.***.**.**.**.**.*.*¶¶*.*..¶¶¶¶"<<endl;
+    cout<<"*.***.***.***.**.**.**.**.*.*.¶¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.***.***.***.**.**.**.**.*.*.*¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.***.***.***.**.**.**.**.*.*.*¶¶¶¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.***.***.***.**.**.**.**.*.*.*¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.***.***.***.**.**.**.**.*.*.*¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.***.***.***.**.**.**.**.*..*.¶¶¶¶¶.*¶¶¶¶"<<endl;
+    cout<<"*.***.***.***.**.**.**.**.*.**¶¶.*.*.*.*¶¶¶"<<endl;
+    cout<<"*.***.***.***.**.**.**.**.*.*.*.*..*.*.*.*¶¶"<<endl;
+        Sleep(200);system("cls");break;
+
+                   case 13:                     cout<<"Haaaaaa!!!"<<endl;
+        cout<<endl;
+        cout<<endl;
+    cout<<"*.*.**.**.*.***.***.**.**.**.**.*.***..*.*.¶¶"<< endl;
+    cout<<"*..***.**.*.***.***.**.**.**.**.*.*..*..*.¶¶¶"<<endl;
+    cout<<"*..***.**.*.***.***.**.**.**.**..*¶¶*.*..¶¶¶¶"<<endl;
+    cout<<".*.***.**.*.***.***.**.**.**.**.*.*¶¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.***.**.*.***.***.**.**.**.**.*..*¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.***.**.*.***.***.**.**.**.**.*.*.*¶¶¶¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.***.**.*.***.***.***.**.**.**.**.*¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.***.**.*.***.***.***.**.**.**..*.*¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.***.**.*.***.***.***.**.****.*..*.¶¶¶¶¶.*¶¶¶¶"<<endl;
+    cout<<"*.***.**.*.***.***.***.*.**.**.*.**¶¶.*.*.*.*¶¶¶"<<endl;
+    cout<<"*.***.**.*.***.***.**.**.**.**.*.*.*.*..*.*.*.*¶¶"<<endl;
+        Sleep(200);system("cls");break;
+
+                   case 14:                      cout<<"Haaaaaa!!!"<<endl;
+        cout<<endl;
+        cout<<endl;
+    cout<<"*.***.***.***.***.***.**.**.**.**.*.*.**..*.*.¶¶"<< endl;
+    cout<<"*.***.***.***.***.***.**.**.**.**.*.*.*.*..*.¶¶¶"<<endl;
+    cout<<"*.***.***.***.***.***.**.**.**.**.*.*¶¶*.*..¶¶¶¶"<<endl;
+    cout<<"*.***.***.***.***.***.**.**.**.**.*.*.¶¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.***.***.***.***.***.**.**.**.**.*.*.*¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.***.***.***.***.***.**.**.**.**.*.*.*¶¶¶¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.***.***.***.***.***.**.**.**.**.*.*.*¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.***.***.***.***.***.**.**.**.**.*.*.*¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.***.***.***.***.***.**.**.**.**.*..*.¶¶¶¶¶.*¶¶¶¶"<<endl;
+    cout<<"*.***.***.***.***.***.**.**.**.**.*.**¶¶.*.*.*.*¶¶¶"<<endl;
+    cout<<"*.***.***.***.***.***.**.**.**.**.*.*.*.*..*.*.*.*¶¶"<<endl;
+        Sleep(200);system("cls");break;
+
+                   case 15:                       cout<<"Haaaaaa!!!"<<endl;
+        cout<<endl;
+        cout<<endl;
+    cout<<"*.**.**.**.**.**.**.**.**.**.**.**.**.**.*.*.**..*.*.¶¶"<< endl;
+    cout<<"*.***.**.**.**.**.**.**.**.*.**.***.*.**.*.*.*.*..*.¶¶¶"<<endl;
+    cout<<"*.**.**.**.**.**.**.**.**.**.**.***.*.**.*.*¶¶*.*..¶¶¶¶"<<endl;
+    cout<<"*.*.**.**.**.**.**.**.**.***.**.**.**.**.*.*.¶¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.**.***.**.**.**.**.**.**.**.*.**.**.**.*.*.*¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.**.**.**.**.*.*.**.**.**.**.**.*.***.**.**.*¶¶¶¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.***.**.**.**.**.**.**.**.*.**.**.**.**.*.*.*¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.**.**.**.***.**.**.**.**.**.**.*.***.*.*.*.*¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.**.**.**.**.**.**.**.**.**.**.**.**.**.*..*.¶¶¶¶¶.*¶¶¶¶"<<endl;
+    cout<<"*.**.**.**.**.**.**.**.**.**.**.**.**.**.*.**¶¶.*.*.*.*¶¶¶"<<endl;
+    cout<<"*.**.**.**.**.**.**.**.**.**.**.*.***.**.*.*.*.*..*.*.*.*¶¶"<<endl;
+        Sleep(200);system("cls");break;
+
+
+                   case 16:                     cout<<"Haaaaaa!!!"<<endl;
+        cout<<endl;
+        cout<<endl;
+    cout<<"*.**.*.**.*.**.**.**.**.**.**.**.**.**.**.**.**.**.*.*.**..*.*.¶¶"<< endl;
+    cout<<"*.**.*.**.*.***.**.**.**.**.**.**.**.*.**.***.*.**.*.*.*.*..*.¶¶¶"<<endl;
+    cout<<"*.**.*.**.*.**.**.**.**.**.**.**.**.**.**.***.*.**.*.*¶¶*.*..¶¶¶¶"<<endl;
+    cout<<"*.**.*.**.*.*.**.**.**.**.**.**.**.***.**.**.**.**.*.*.¶¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.**.*.**.*.**.***.**.**.**.**.**.**.**.*.**.**.**.*.*.*¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"**.**.*.**..**.**.**.**.*.*.**.**.**.**.**.*.***.**.**.*¶¶¶¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"**.**.*.**..***.**.**.**.**.**.**.**.*.**.**.**.**.*.*.*¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"**.**.*.**..**.**.**.***.**.**.**.**.**.**.*.***.*.*.*.*¶¶¶¶¶¶¶¶¶¶¶"<<endl;
+    cout<<"*.*.**.*.**.**.**.**.**.**.**.**.**.**.**.**.**.**.*..*.¶¶¶¶¶.*¶¶¶¶"<<endl;
+    cout<<"*.*.**.*.**.**.**.**.**.**.**.**.**.**.**.**.**.**.*.**¶¶.*.*.*.*¶¶¶"<<endl;
+    cout<<"*.*.**.*.**.**.**.**.**.**.**.**.**.**.**.*.***.**.*.*.*.*..*.*.*.*¶¶"<<endl;
+        Sleep(200);system("cls");break;
+
+        }
+}}
+void paski()
+{
+     cout<<"Twoj poziom: "<<lvl<<endl;
+    cout<<"Wcisnij 1 aby udezyc piescia albo 2 aby kopnac."<<endl;
+    cout<<"1. Piesc smoka"<<endl;
+    cout<<"2. Kopniecie weza"<<endl;
+    cout<<"3. Hp Potion(+"<<200+bonus_zbroi<<"hp). Pozostalo: "<<hppotka<<endl;
+        if(special<=9){
+    cout<<"4. Special (X)"<<endl;
+    cout<<"Pasek speciala: ";}
+
+
+    switch(special)
+    {
+        case 0:     cout<<"[          ]"<<endl;break;
+        case 1:     cout<<"[|         ]";break;
+        case 2:     cout<<"[||        ]";break;
+        case 3:     cout<<"[|||       ]";break;
+        case 4:     cout<<"[||||      ]";break;
+        case 5:     cout<<"[|||||     ]";break;
+        case 6:     cout<<"[||||||    ]";break;
+        case 7:     cout<<"[|||||||   ]";break;
+        case 8:     cout<<"[||||||||  ]";break;
+        case 9:     cout<<"[||||||||| ]";break;
+    }
+if (special>=10)   {cout<<"4. Special naladowany!!!"<<endl;
+        cout<<"Pasek speciala: [||||||||||]";}
+    cout<<endl;
+
+    cout<<"------------------------------------------------------------------------------------"<<endl;
+    cout<<"Bron: "<<jakas_bron;
+    cout<<"                           Zbroja: ";if(zbroja==1){  cout<<"Popiersie Pilsudskiego! ";}
+                                                    if(zbroja==2){cout<<"Szkarlatna kolczuga! ";}
+
+    cout<<endl;
+    cout<<"Attack bonus: "<<bonus_broni<<"                              HP bonus: ";    if(zbroja==1)
+                                                                        {
+
+                                                                            hpbonus=50*lvl;
+                                                                            cout<<"+"<<hpbonus;}if(zbroja==2){hpbonus=100*lvl;cout<<"+"<<hpbonus;}
+
+    cout<<endl;
+
+    cout<<"-------------------------------------------------------------------------------------"<<endl;
+    cout<<endl;
+
+    cout<<nick<<" "<<hpmoje<<" Hp                                "<<jaki_potwor<<": "<<hpmoba<<" Hp"<<endl;
+
+    cout<<"Wybieram: "<<endl;
+    cout<<"";
+}
+void walka_z_bossem()
+{
+    int zycie=1; int boss=1;klucz=0;
+jaki_potwor="Chimera";hpmoba=10000;staty();
+
+///////////////////////////////////////////////////Rozpoczynamy starcie
+system("cls");
+for(int i=5; i>=0; i--) {
+        int odliczanie=5;
+cout<<endl;
+cout<<endl;
+cout<<endl;
+cout<<endl;
+cout<<"                       Rozpoczynamy ostateczne starcie!"<<endl;
+cout<<"                                    "<<i<<endl;
+ Sleep(700);
+ system("cls");
+ //Sleep(500);
+
+ }
+
+
+
+system("cls");
+
+
+
+//////////////////////////////////////////////////////////////////////////////Walka////////////////////////////////////////////////////////////////////
+while((zycie>0)&&(boss>0)){
+    paski();
+    srand(time(NULL));
+    wybor=getch();
+
+
+///////////////////////////////////////////// walka
+        switch(wybor)
+        { wpierdol=0;
+
+        case '1':
+
+            damage=random(damage)+bonus_broni;
+            chance=random(chance);
+            cout<<" Zadales "<<damage<<" obrazen."<<endl;hpmoba-=damage;
+             srand(time(NULL));
+             damage=(random(damage)+bonus_broni)/2;
+            cout<<" Zadales "<<damage<<" obrazen."<<endl;
+            if (chance>60) {wpierdol= (rand()%150+101)+bonus_bossa;
+                            hpmoje-=wpierdol;
+                            cout<<jaki_potwor<<" atakuje Cie za: "<<wpierdol<<endl;}
+            hpmoba-=damage;
+if((wpierdol!=0)&&(special<=10)){special++; wpierdol=0;}
+            break;
+        case '2':
+
+            chance=random(chance);
+            for(int i=0; i<=8; i++) {damage = rand()%50+151;}
+            damage=damage+bonus_broni;
+            if (chance>=85){damage=damage*2;cout<<"Critical!"<<endl;}
+            if (chance<30) {damage=0; cout<<jaki_potwor<<" zrobil unik"<<endl; if (damage>70){wpierdol= (rand()%200+101)+bonus_bossa;
+                            hpmoje-=wpierdol;
+                            cout<<jaki_potwor<<" atakuje Cie za: "<<wpierdol<<endl;}}
+            cout<<" Zadales "<<damage<< " obrazen."<<endl;
+            if (chance>50) {wpierdol= (rand()%150+101)+bonus_bossa;
+                            hpmoje=hpmoje-wpierdol;
+                            cout<<jaki_potwor<<" atakuje Cie za: "<<wpierdol<<endl;}
+            hpmoba-=damage;
+
+
+if((wpierdol!=0)&&(special<=10)){special++; wpierdol=0;}
+            break;
+        case '3':
+            if(hppotka!=0)
+            {
+              for(int i=0; i<=6; i++) {damage = rand()%50+151;chance = rand()%100+1;}
+              hpmoje=hpmoje+200+bonus_zbroi;
+              cout<<" Uzywasz hp potki! Leczysz sie o "<<200+bonus_zbroi<<endl;
+
+                hppotka--;
+                if (chance>40) {wpierdol=damage+bonus_bossa;
+                            hpmoje=hpmoje-wpierdol;
+
+                            cout<<jaki_potwor<<" atakuje Cie za: "<<wpierdol<<endl;
+                            }if((wpierdol!=0)&&(special<=10)){special++; wpierdol=0;}            }
+             else
+                cout<<"Nie masz juz hp potek!"<<endl;
+            break;
+
+        case '4':
+                 if(special>=10)
+                    {
+    system("cls");
+    ulti();
+    special=0;
+    paski();
+        for(int i=0; i<=6; i++) {damage = rand()%50+151;chance = rand()%100+1;}
+            damage=damage+bonus_broni;
+            damage=damage*lvl*2;
+            cout<<"Zadajesz "<<damage<<endl;
+            hpmoba-=damage;
+
+            Sleep(2000);
+            }
+                else{cout<<"Naladuj special!"<<"\a";}
+ break;
+default:
+cout<<"Nie ma takiej opcji w menu!!";
+
+
+
+        }
+
+Sleep(1500);
+system("cls");
+
+
+////////////////////////////////////////////////////////////////////Zabicie bosa///////////////////////////////////////////////////
+
+ if (hpmoba<=0){
+
+ for(int i=0; i<=2; i++)
+  {
+
+cout<<endl;
+cout<<endl;
+cout<<endl;
+cout<<endl;
+cout<<"                       Zajebales skurwiela!!!"<<endl;
+cout<<"                       Gra zostaje zapisana."<<endl;
+ Sleep(500);
+ system("cls");
+ Sleep(500);
+
+  }
+/////////////////////////////nabijanie xpa////////////////
+xpboss=1;
+naliczanie(obecny_xp,xp);
+
+
+    xp=(ile_xpa(xp)+(lvl*10));
+   obecny_xp+=xp;
+    if(obecny_xp>=(lvl*100))
+
+       {
+            system("cls");
+            obecny_xp-=(lvl*100);
+
+
+
+                cout<<"Twoj poziom doswiadczenia zwieksza sie"<<endl;
+                lvl++;
+                cout<<"Zdobywasz: "<<obecny_xp<<" XP/"<<lvl*100<<endl;
+
+
+                cout<<"Zdobywasz poziom: "<<lvl<<"!!!"<<endl;
+
+
+            getchar();
+
+       }
+drop();
+drop();drop();
+drop();drop();
+xpboss==0;
+        Sleep(5000);
+zapis();
+system("cls");
+cout<<"To juz niestety koniec Twojej przygody..."<<endl;
+Sleep(3000);
+cout<<"Wiecej gra nie zostala napisana..."<<endl;
+Sleep(3000);
+cout<<"...Przynajmniej narazie..."<<endl;
+Sleep(3000);
+cout<<"Jednak ta wersja nie ma konica."<<endl;
+Sleep(3000);
+cout<<"Dlatego zapytam Cie jeszcze raz...(Enter aby przejsc dalej)"<<endl;
+getchar();getchar();
+cout<<"Szukamy dalej czy chcesz wrocic do menu?"<<endl;
+cout<<"1. Szukamy!"<<endl;
+cout<<"2. Menu"<<endl;
+cin>>opcja;
+if(opcja==2){cos=10;}
+
+
+ plik.close();
+boss-=1;
+ }
+
+   ////////////////////////////////////////////////////////////////////////////Zgon//////////////////////////////////////////////////////
+if (hpmoje<=0){zgon();zycie-=1; }
+}
+  }
+
+void zgon() {cout<<"Giniesz!"<<endl;
+cout<<"Wczytaj gre od nowa";
+
+hppotka=hppotka+2;
+zapis();
+
+Sleep(2000);
+cos=10;
+}
+
+void nowagra(){
+     cout<<"Nie masz zadnych save'ow, Wczytuje gre od nowa"<<endl<<"Powodzenia!"<<endl;
+        Sleep(2000);
+        system("cls");
+        plik.open("save.txt",ios::out);
+            hppotka=3;
+            lvl=1;
+        cout << "Podaj nick: ";cin>>nick;plik<<nick<<endl;
+        ////////////////////////////////////////////////////////////////////BRON//////////////////////////////////////////////////////////////
+        cout<<"Jaka chcesz bron?"<<endl;
+        cout<<"Bron poprawia Twoj atak"<<endl;
+        cout<<"1. Miecz pirata +20 do ataku"<<endl;
+        cout<<"2. Kocie pazury +10 do ataku"<<endl;
+        cout<<": ";
+    cin>>bron;
+    plik<<bron<<endl;
+       switch(bron)
+    {
+    case 1: cout<<"Od teraz walczysz Mieczem pirata!"<<endl; break;
+    case 2: cout<<"Od teraz wladasz Kocimi pazurami!"<<endl; break;
+     default: cout<<"Niepoprawny numer broni!";
+    }
+    Sleep(2000);
+    system("cls");
+    ////////////////////////////////////////////////////////////////////ZBROJA////////////////////////////////////////////////////////////////
+    cout<<"Jaka chcesz zbroje?"<<endl;
+    cout<<"Zbroja dodaje Ci zdrowie i wiecej sie leczysz"<<endl;
+        cout<<"1. Popiersie Pilsudskiego +50/lvl Hp oraz potion bonus +100/lvl"<<endl;
+        cout<<"2. Szkarlatna kolczuga +100/lvl Hp oraz potion bonus +50/lvl"<<endl;
+        cout<<": ";
+    cin>>zbroja;
+    plik<<zbroja<<endl;
+       switch(zbroja)
+    {
+    case 1: cout<<"Od teraz nosisz z duma Popiersie Pilsudskiego!"<<endl; break;
+    case 2: cout<<"Od teraz nosisz Szkarlatna kolczuge!"<<endl;break;
+     default: cout<<"Niepoprawny wybor!";
+    }
+    Sleep(2000);
+system("cls");
+ plik.close();
+
+
+    cout<<"Rozpoczynasz swoja przygode!"<<endl; Sleep(3000);
+    cout<<"Twoim zadaniem jest wydostac sie z labiryntu Chimery!"<<endl;
+    cout<<"Twoj bohater "<<nick<<" potrafi sam chodzic po labiryncie, jednak musisz mu pomagac w walce!(Wcisnij Enter)"<<endl;
+      getchar();getchar();
+system("cls");}
+
+void jaka_bron(){   if(bron==1){jakas_bron="Miecz Pirata";}
+                    if(bron==2){jakas_bron="Kocie Pazury";}}
+
+int enchant(int bron)
+{
+scroll--;
+    chance=random(chance);
+        if ((chance<=55)||(bron<=2)){bron++;}
+        else{bron=0;cout<<"Peklo"<<endl;}
+
+return bron;
+}
+int attack_dmg(int bonus_broni)
+{
+bonus_broni=bonus_broni+(bron_enchant*(10*bron_wspolczynnik));
+return bonus_broni;
+
+}
+
+int kowal()
+{
+
+        jaka_bron();
+        system("cls");
+        cout<<"     Witaj u Blackshmita Fafora!"<<endl;
+    cout<<"Enchantowanie zwieksza sile twojej broni"<<endl;
+    cout<<"Obecnie posiadasz: "<<scroll<<" scroll'i do enchantu"<<endl;
+    cout<<"Twoja bron "<<jakas_bron<<" jest na: "<<bron_enchant<<endl;
+    cout<<"Posiada: "<<attack_dmg(bonus_broni)<<" ataku"<<endl;
+        cout << "Co chcesz zrobic?" << endl;
+        cout << "1. Enchant broni"<<endl;
+        cout<< "2. Powrot"<<endl;
+        wybor=getch();
+switch(wybor)
+{
+    case '1': srand(time(NULL));
+if (scroll!=0){bron_enchant=enchant(bron_enchant);}
+else {cout<<"Nie masz scrolli do enchantowania!"<<endl<<"Zdobadz scrolle w labiryncie!"<<endl;}
+
+break;
+    case '2': zapis();opcja=10; break;
+}
+
+getchar();
+
+
+return bonus_broni;
+
+
+
+    }
+
+void walka()
+{mob=1;potwor();hpmoba=hpmoba*lvl;life=1;
+    system("cls");
+for(int i=5; i>=0; i--) {
+        int odliczanie=5;
+cout<<endl;
+cout<<endl;
+cout<<endl;
+cout<<endl;
+cout<<"                           Rozpoczynamy starcie!"<<endl;
+cout<<"                                    "<<i<<endl;
+ Sleep(700);
+ system("cls");
+
+
+ }
+system("cls");
+while((life>0)&&(mob>0))
+    {
+    paski();
+
+    srand(time(NULL));
+    wybor=getch();
+
+
+///////////////////////////////////////////// walka
+        switch(wybor)
+        { wpierdol=0;
+
+        case '1':
+
+            damage=random(damage)+bonus_broni;
+            chance=random(chance);
+            cout<<" Zadales "<<damage<<" obrazen."<<endl;hpmoba-=damage;
+             srand(time(NULL));
+             damage=(random(damage)+bonus_broni)/2;
+            cout<<" Zadales "<<damage<<" obrazen."<<endl;
+            if (chance>60) {wpierdol= (rand()%150+101)+bonus_bossa;
+                            hpmoje-=wpierdol;
+                            cout<<jaki_potwor<<" atakuje Cie za: "<<wpierdol<<endl;}
+            hpmoba-=damage;
+if((wpierdol!=0)&&(special<=10)){special++; wpierdol=0;}
+            break;
+        case '2':
+
+            chance=random(chance);
+            for(int i=0; i<=8; i++) {damage = rand()%50+151;}
+            damage=damage+bonus_broni;
+            if (chance>=85){damage=damage*2;cout<<"Critical!"<<endl;}
+            if (chance<30) {damage=0; cout<<jaki_potwor<<" zrobil unik"<<endl; if (damage>70){wpierdol= (rand()%200+101)+bonus_bossa;
+                            hpmoje-=wpierdol;
+                            cout<<jaki_potwor<<" atakuje Cie za: "<<wpierdol<<endl;}}
+            cout<<" Zadales "<<damage<< " obrazen."<<endl;
+            if (chance>50) {wpierdol= (rand()%150+101)+bonus_bossa;
+                            hpmoje=hpmoje-wpierdol;
+                            cout<<jaki_potwor<<" atakuje Cie za: "<<wpierdol<<endl;}
+            hpmoba-=damage;
+
+
+if((wpierdol!=0)&&(special<=10)){special++; wpierdol=0;}
+            break;
+        case '3':
+            if(hppotka!=0)
+            {
+              for(int i=0; i<=6; i++) {damage = rand()%50+151;chance = rand()%100+1;}
+              hpmoje=hpmoje+200+bonus_zbroi;
+              cout<<" Uzywasz hp potki! Leczysz sie o "<<200+bonus_zbroi<<endl;
+
+                hppotka--;
+                if (chance>40) {wpierdol=damage+bonus_bossa;
+                            hpmoje=hpmoje-wpierdol;
+
+                            cout<<jaki_potwor<<" atakuje Cie za: "<<wpierdol<<endl;
+                            }if((wpierdol!=0)&&(special<=10)){special++; wpierdol=0;}            }
+             else
+                cout<<"Nie masz juz hp potek!"<<endl;
+            break;
+
+        case '4':
+                 if(special>=10)
+                    {
+    system("cls");
+    ulti();
+    special=0;
+    paski();
+        for(int i=0; i<=6; i++) {damage = rand()%50+151;chance = rand()%100+1;}
+            damage=damage*lvl*2;
+            cout<<"Zadajesz "<<damage<<endl;
+            hpmoba-=damage;
+
+            Sleep(2000);
+            }
+                else{cout<<"Naladuj special!"<<"\a";}
+ break;
+default:
+cout<<"Nie ma takiej opcji w menu!!";
+
+
+
+        }
+
+Sleep(1500);
+system("cls");
+
+
+////////////////////////////////////////////////////////////////////Zabicie bosa///////////////////////////////////////////////////
+
+ if (hpmoba<=0){
+
+ for(int i=0; i<=2; i++)
+  {
+
+cout<<endl;
+cout<<endl;
+cout<<endl;
+cout<<endl;
+cout<<"                       Zajebales skurwiela!!!"<<endl;
+cout<<"                       Gra zostaje zapisana."<<endl;
+ Sleep(500);
+ system("cls");
+ Sleep(500);
+
+  }
+/////////////////////////////nabijanie xpa////////////////
+naliczanie(obecny_xp,xp);
+
+
+    xp=(ile_xpa(xp)+(lvl*10));
+   obecny_xp+=xp;
+    if(obecny_xp>=(lvl*100))
+
+       {
+            system("cls");
+            lvl++;
+            obecny_xp-=((lvl-1)*100);
+
+                cout<<"Twoj poziom doswiadczenia zwieksza sie"<<endl;
+
+                cout<<"Zdobywasz: "<<obecny_xp<<" XP/"<<lvl*100<<endl;
+
+
+                cout<<"Zdobywasz poziom: "<<lvl<<"!!!"<<endl;
+
+
+            getchar();
+
+       }
+drop();
+        Sleep(3000);
+zapis();
+cout<<"Szukamy dalej czy chcesz wrocic do menu?"<<endl;
+cout<<"1. Szukamy!"<<endl;
+cout<<"2. Menu"<<endl;
+cin>>opcja;
+if(opcja==2){cos=10;}
+
+
+ plik.close();
+mob-=1;
+ }
+
+   ////////////////////////////////////////////////////////////////////////////Zgon//////////////////////////////////////////////////////
+if (hpmoje<=0){zgon();life-=1;cos=10; }
+}
+  }
+void CzyWalcze()
+{
+    random(d);
+    if(d>70)
+        {walka();}
+}
+void potwor()
+{
+int x;
+for(int i=1;i<=10; i++){x = rand()%10+1;}
+    switch(x)
+    {
+        case 1: jaki_potwor="Szczor";hpmoba=100;break;
+        case 2: jaki_potwor="Nietoperz";hpmoba=200;break;
+        case 3: jaki_potwor="Grzyb na scianie";hpmoba=50;break;
+        case 4: jaki_potwor="Wilk";hpmoba=350;break;
+        case 5: jaki_potwor="Dzika Kaczka";hpmoba=100;break;
+        case 6: jaki_potwor="Golab";hpmoba=210;break;
+        case 7: jaki_potwor="Mokry Goblin";hpmoba=500;break;
+        case 8: jaki_potwor="Goblin";hpmoba=400;break;
+        case 9: jaki_potwor="Minotaur";hpmoba=1000;break;
+        case 10: jaki_potwor="Imp";hpmoba=700;break;
+    }
+}
+void drop()
+{
+    int x;
+    for(int i=1;i<=10; i++){x = rand()%100+1;}
+    if(x<=15){hppotka+=1;cout<<"Z potwora wypadla Ci hppotka!"<<endl;}
+    if((x>15)&&(x<=30)){hppotka+=2;cout<<"Z potwora wypadla Ci hppotka x2!"<<endl;}
+    if((x>30)&&(x<=45)){scroll+=1;cout<<"Z potwora wypadl Ci Scroll Enchantu!"<<endl;}
+    if((x>45)&&(x<=60)){scroll+=1;cout<<"Z potwora wypadl Ci Scroll Enchantu!"<<endl;}
+    if((x>60)&&(x<=75)){hppotka+=1;cout<<"Z potwora wypadla Ci hppotka!"<<endl;}
+    if((x>75)&&(lvl>=20)&&(klucz=0)){klucz++;cout<<"Z potwora wypadl Ci klucz do komnaty Chimery!"<<endl;}
+}
+void zapis()
+{plik.open("save.txt",ios::out);
+plik<<nick<<endl;
+plik<<lvl<<endl;
+plik<<bron<<endl;
+plik<<hppotka<<endl;
+plik<<zbroja<<endl;
+plik<<obecny_xp<<endl;
+plik<<scroll<<endl;
+plik<<bron_enchant<<endl;
+plik<<sala<<endl;
+plik<<klucz<<endl;
+plik.close();}
+
+
+
+
+
+
